@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="hero__portrait" aria-label="Portrait de Dr. Raja Messou">
-        <div class="placeholder">RM</div>
+        <img src="assets/images/portrait.jpg" alt="Dr. Raja Messou">
         <div class="hero__badge">Agadir — Anza</div>
       </div>
     </div>
@@ -50,8 +50,8 @@
       <div class="section__head">
         <div>
           <span class="eyebrow">À la une</span>
-          <h2>Le sujet du moment</h2>
-          <p>Un article important mis en avant : intervention, communiqué, rencontre, ou prise de position.</p>
+          <h2>Rencontre citoyenne à Anza : mobilité, éclairage public et services de proximité au cœur des échanges.</h2>
+          <p>Compte rendu détaillé, photos de terrain et liste des dossiers transmis aux services. La proximité commence par l'écoute — et se mesure aux actes.</p>
         </div>
       </div>
       <div data-featured></div>
@@ -97,6 +97,19 @@
             <span>Permanence citoyenne, rencontre, café-discussion.</span>
           </a>
         </div>
+
+        <div class="citizen__themes">
+          <span class="citizen__themes-label">Par thématique</span>
+          <a href="reclamations.html?theme=Voirie">Voirie</a>
+          <a href="reclamations.html?theme=Éclairage">Éclairage</a>
+          <a href="reclamations.html?theme=Déchets">Déchets</a>
+          <a href="reclamations.html?theme=Transport">Transport</a>
+          <a href="reclamations.html?theme=Jeunesse">Jeunesse</a>
+          <a href="reclamations.html?theme=Femmes">Femmes</a>
+          <a href="reclamations.html?theme=Sport">Sport</a>
+          <a href="reclamations.html?theme=Culture">Culture</a>
+          <a href="reclamations.html?theme=Environnement">Environnement</a>
+        </div>
       </div>
     </div>
   </section>
@@ -120,21 +133,21 @@
   <section class="section">
     <div class="container">
       <div class="bio">
-        <div class="bio__img"><div class="ph">RM</div></div>
+        <div class="bio__img"><img src="assets/images/portrait-cut.png" alt="Dr. Raja Messou"></div>
         <div>
           <span class="eyebrow">Qui est Raja Messou ?</span>
-          <h2>Fille d'Anza, fille d'Agadir.</h2>
+          <h2>Fille d'Anza, engagée pour Agadir.</h2>
           <p>
-            Docteure en Langues et Communication, engagée depuis toujours dans la vie associative,
-            politique et citoyenne d'Agadir. Conseillère communale, présidente du Conseil régional
-            USFP Agadir-Idaoutanane, elle porte un même fil rouge : la proximité réelle,
-            la transparence concrète, et la redevabilité comme méthode.
+            Docteure en Langues et Communication, actrice associative et élue communale,
+            Raja Messou inscrit son engagement dans une logique simple :
+            <strong>écouter les citoyens, défendre les quartiers, et rendre compte publiquement</strong>
+            de l'action menée.
           </p>
           <ul class="bio__list">
             <li>Conseillère communale d'Agadir</li>
             <li>Présidente du Conseil régional USFP Agadir-Idaoutanane</li>
-            <li>Docteure en Langues et Communication</li>
-            <li>Engagement associatif, droits des femmes, jeunesse, quartiers</li>
+            <li>Docteure en Langues et Communication (Université Ibn Zohr, 2025)</li>
+            <li>Engagement associatif : droits des femmes, jeunesse, quartiers</li>
           </ul>
           <a class="btn btn--primary" href="a-propos.html">Découvrir le parcours complet</a>
         </div>
@@ -149,7 +162,7 @@
         <div>
           <span class="eyebrow" style="color:var(--rose-light);">Terrain</span>
           <h2>Nous avons écouté → noté → suivi</h2>
-          <p class="muted">Quelques dossiers ouverts à partir des remarques reçues sur le terrain.</p>
+          <p class="muted">Six dossiers ouverts ce trimestre, classés par quartier : Anza, Bensergao, Tikiouine, Dakhla, Talborjt et Hay Mohammadi.</p>
         </div>
         <a class="btn btn--light btn--sm" href="terrain.html">Voir tous les dossiers →</a>
       </div>
@@ -164,7 +177,7 @@
         <span class="eyebrow" style="color:var(--rose-light);">Rester informé·e</span>
         <h2>Recevez les mises à jour citoyennes par email.</h2>
         <p>Articles publiés, permanences, rencontres de quartier, comptes rendus.</p>
-        <form class="form" data-form="newsletter" style="max-width:720px;margin-top:1.2rem;">
+        <form class="form" data-form="newsletter" data-endpoint="" style="max-width:720px;margin-top:1.2rem;">
           <div class="form__row">
             <div class="field">
               <label>Email <span class="req">*</span></label>
@@ -177,7 +190,10 @@
           </div>
           <div class="field--check">
             <input type="checkbox" id="nl-c" name="consent" required>
-            <label for="nl-c">J'accepte de recevoir des mises à jour citoyennes de Dr. Raja Messou (loi 09-08).</label>
+            <label for="nl-c">
+              J'accepte de recevoir des mises à jour citoyennes de Dr. Raja Messou.
+              <br><span class="muted" style="font-size:.78rem;">Vos données ne seront utilisées que pour l'envoi des informations citoyennes liées aux activités publiques de Dr. Raja Messou — dans le strict respect de la loi 09-08.</span>
+            </label>
           </div>
           <div>
             <button class="btn btn--primary" type="submit">M'abonner aux mises à jour</button>

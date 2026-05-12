@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>الوسائط — د. رجاء ميسو</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div data-header></div>
+
+  <section class="pagehead">
+    <div class="container">
+      <div class="breadcrumbs"><a href="index.html">الرئيسية</a> · الوسائط</div>
+      <span class="eyebrow" style="color:#fff;opacity:.9;">الذاكرة البصرية</span>
+      <h1>الوسائط المواطنة</h1>
+      <p>صور، فيديوهات، ملصقات، حوارات، مقالات صحفية، إنفوغرافيك ووثائق.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="filters">
+        <button class="filter active" data-media="الكل">الكل</button>
+        <button class="filter" data-media="صور">صور</button>
+        <button class="filter" data-media="فيديوهات">فيديوهات</button>
+        <button class="filter" data-media="صحافة">صحافة</button>
+        <button class="filter" data-media="إنفوغرافيك">إنفوغرافيك</button>
+        <button class="filter" data-media="وثائق">وثائق</button>
+        <button class="filter" data-media="ميدان">ميدان</button>
+      </div>
+
+      <div class="media__grid" id="media-grid">
+        <div class="media__item" data-type="صور">
+          <span class="media__item__type">صور</span>
+          <div class="ph">AN</div>
+          <div class="media__item__cap">لقاء مواطن — أنزا، ماي 2026</div>
+        </div>
+        <div class="media__item" data-type="فيديوهات">
+          <span class="media__item__type">فيديو</span>
+          <div class="ph">▶</div>
+          <div class="media__item__cap">مداخلة في المجلس الجماعي — أبريل 2026</div>
+        </div>
+        <div class="media__item" data-type="صحافة">
+          <span class="media__item__type">صحافة</span>
+          <div class="ph">📰</div>
+          <div class="media__item__cap">حوار إذاعي محلي — مارس 2026</div>
+        </div>
+        <div class="media__item" data-type="إنفوغرافيك">
+          <span class="media__item__type">إنفوغرافيك</span>
+          <div class="ph">📊</div>
+          <div class="media__item__cap">خريطة الأحياء التي زرناها</div>
+        </div>
+        <div class="media__item" data-type="وثائق">
+          <span class="media__item__type">PDF</span>
+          <div class="ph">PDF</div>
+          <div class="media__item__cap">التقرير الثلاثي Q1 — 2026</div>
+        </div>
+        <div class="media__item" data-type="ميدان">
+          <span class="media__item__type">ميدان</span>
+          <div class="ph">BE</div>
+          <div class="media__item__cap">زيارة لبنسركاو — جمع النفايات</div>
+        </div>
+        <div class="media__item" data-type="صور">
+          <span class="media__item__type">صور</span>
+          <div class="ph">TA</div>
+          <div class="media__item__cap">لقاء قهوة بتالبرجت</div>
+        </div>
+        <div class="media__item" data-type="فيديوهات">
+          <span class="media__item__type">فيديو</span>
+          <div class="ph">▶</div>
+          <div class="media__item__cap">عمود: ميثاق تشغيل الشباب</div>
+        </div>
+        <div class="media__item" data-type="إنفوغرافيك">
+          <span class="media__item__type">إنفوغرافيك</span>
+          <div class="ph">📈</div>
+          <div class="media__item__cap">لوحة قيادة ثلاثية</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="citizen">
+        <h2>صورة، فيديو، أو شهادة للمشاركة؟</h2>
+        <p>أرسلوا لنا محتواكم المواطن، سندرس نشره.</p>
+        <a class="btn btn--light" href="reclamations.html?type=شهادة">مشاركة محتواي</a>
+      </div>
+    </div>
+  </section>
+
+  <div data-footer></div>
+  <script src="../assets/script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const filters = document.querySelectorAll(".filter[data-media]");
+      const items = document.querySelectorAll("#media-grid .media__item");
+      filters.forEach(f => f.addEventListener("click", () => {
+        filters.forEach(x => x.classList.remove("active"));
+        f.classList.add("active");
+        const t = f.dataset.media;
+        items.forEach(it => {
+          it.style.display = (t === "الكل" || it.dataset.type === t) ? "" : "none";
+        });
+      }));
+    });
+  </script>
+</body>
+</html>

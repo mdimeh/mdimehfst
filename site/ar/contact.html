@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>اتصال — د. رجاء ميسو</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div data-header></div>
+
+  <section class="pagehead">
+    <div class="container">
+      <div class="breadcrumbs"><a href="index.html">الرئيسية</a> · اتصال</div>
+      <span class="eyebrow" style="color:#fff;opacity:.9;">اتصال مباشر</span>
+      <h1>اكتب إلى رجاء ميسو</h1>
+      <p>باب مفتوح، عدّة مسارات. اختر الذي يناسبك.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cards">
+        <a class="card" href="#contact-form" style="text-decoration:none;color:inherit;">
+          <div class="card__img"><div class="ph">✉</div><span class="card__cat">اكتب</span></div>
+          <div class="card__body">
+            <h3 class="card__title">أريد الاتصال بـ رجاء ميسو</h3>
+            <p class="card__excerpt">لأي سؤال، طلب صحفي، شراكة، أو رسالة شخصية.</p>
+            <span class="card__more">ملء الاستمارة</span>
+          </div>
+        </a>
+        <a class="card" href="reclamations.html" style="text-decoration:none;color:inherit;">
+          <div class="card__img"><div class="ph">!</div><span class="card__cat">شكاية</span></div>
+          <div class="card__body">
+            <h3 class="card__title">أريد إيداع شكاية</h3>
+            <p class="card__excerpt">تبليغ من الحي، طلب مواطن، اقتراح عمومي.</p>
+            <span class="card__more">فضاء المواطنين</span>
+          </div>
+        </a>
+        <a class="card" href="actualites.html" style="text-decoration:none;color:inherit;">
+          <div class="card__img"><div class="ph">📰</div><span class="card__cat">تابع</span></div>
+          <div class="card__body">
+            <h3 class="card__title">أريد متابعة الأخبار</h3>
+            <p class="card__excerpt">قراءة آخر المنشورات، الاشتراك في النشرة المواطنة.</p>
+            <span class="card__more">رؤية المنشورات</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container row">
+      <div>
+        <span class="eyebrow">معلومات الاتصال</span>
+        <h2>كيف يمكن التواصل معنا</h2>
+        <ul class="bio__list">
+          <li><strong>البريد الإلكتروني:</strong>&nbsp;contact@rajamessou.ma</li>
+          <li><strong>الهاتف:</strong>&nbsp;بموعد مسبق</li>
+          <li><strong>WhatsApp:</strong>&nbsp;متاح لطلبات المواعيد المواطنة</li>
+          <li><strong>المداومة المواطنة:</strong>&nbsp;أكادير — مواعيد في الأجندة</li>
+          <li><strong>الشبكات الاجتماعية:</strong>&nbsp;فيسبوك · إنستغرام · X · يوتيوب</li>
+        </ul>
+        <a class="btn btn--primary" href="agenda.html">رؤية المداومات</a>
+      </div>
+
+      <div>
+        <form class="form" id="contact-form" data-form="contact" data-endpoint="">
+          <div class="form__row">
+            <div class="field">
+              <label>الاسم <span class="req">*</span></label>
+              <input name="nom" required placeholder="اسمك الكامل">
+            </div>
+            <div class="field">
+              <label>البريد الإلكتروني <span class="req">*</span></label>
+              <input type="email" name="email" required placeholder="anta@example.ma">
+            </div>
+          </div>
+          <div class="field">
+            <label>الموضوع <span class="req">*</span></label>
+            <input name="sujet" required placeholder="موضوع رسالتك">
+          </div>
+          <div class="field">
+            <label>الرسالة <span class="req">*</span></label>
+            <textarea name="message" required placeholder="رسالتك…"></textarea>
+          </div>
+          <div class="field--check">
+            <input type="checkbox" id="c-c" name="consent" required>
+            <label for="c-c">أوافق على معالجة بياناتي للرد على رسالتي (قانون 09-08).</label>
+          </div>
+          <div><button class="btn btn--primary" type="submit">إرسال رسالتي</button></div>
+          <div class="form__success"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div data-footer></div>
+  <script src="../assets/script.js"></script>
+</body>
+</html>
