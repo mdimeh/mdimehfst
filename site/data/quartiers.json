@@ -1,0 +1,44 @@
+[
+  {
+    "quartier": "Anza",
+    "sujet": "Éclairage public — rues secondaires",
+    "statut": "Signalé",
+    "action": "Transmis aux services techniques",
+    "date": "2026-05-08"
+  },
+  {
+    "quartier": "Bensergao",
+    "sujet": "Collecte des déchets — fréquence insuffisante",
+    "statut": "Suivi",
+    "action": "Rendez-vous obtenu avec le prestataire",
+    "date": "2026-05-04"
+  },
+  {
+    "quartier": "Tikiouine",
+    "sujet": "Sécurité aux abords de l'école primaire",
+    "statut": "En cours",
+    "action": "Note de synthèse en préparation",
+    "date": "2026-04-29"
+  },
+  {
+    "quartier": "Dakhla",
+    "sujet": "Mobilité — desserte du quartier",
+    "statut": "Reçu",
+    "action": "Réunion publique programmée le 29 mai",
+    "date": "2026-04-21"
+  },
+  {
+    "quartier": "Talborjt",
+    "sujet": "Espace public — entretien de la place centrale",
+    "statut": "Réponse reçue",
+    "action": "Calendrier de travaux communiqué",
+    "date": "2026-04-15"
+  },
+  {
+    "quartier": "Hay Mohammadi",
+    "sujet": "Voirie — nids-de-poule rue principale",
+    "statut": "Suivi",
+    "action": "Inspection conjointe demandée",
+    "date": "2026-04-10"
+  }
+]

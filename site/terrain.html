@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Terrain — Dr. Raja Messou</title>
+  <meta name="description" content="Présence de terrain : rencontres, dossiers suivis par quartier, comptes rendus citoyens.">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div data-header></div>
+
+  <section class="pagehead">
+    <div class="container">
+      <div class="breadcrumbs"><a href="index.html">Accueil</a> · Terrain</div>
+      <span class="eyebrow" style="color:#fff;opacity:.9;">Présence de terrain</span>
+      <h1>Sur le terrain, avec les habitants.</h1>
+      <p>
+        Une logique simple, répétée jour après jour&nbsp;:
+        <strong>nous avons écouté → nous avons noté → nous suivons le dossier</strong>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow">Quartiers visités</span>
+          <h2>Dossiers ouverts à partir des remarques citoyennes</h2>
+          <p>Chaque ligne ci-dessous correspond à un sujet remonté sur le terrain et à son suivi.</p>
+        </div>
+        <a class="btn btn--primary btn--sm" href="reclamations.html">Signaler un sujet</a>
+      </div>
+      <div data-dossiers></div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow">Comptes rendus</span>
+          <h2>Dernières publications de terrain</h2>
+          <p>Récits, photos et synthèses des rencontres organisées dans les quartiers.</p>
+        </div>
+        <a class="btn btn--ghost btn--sm" href="actualites.html">Toutes les actualités →</a>
+      </div>
+      <div class="cards" data-latest="6"></div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container">
+      <div class="row">
+        <div>
+          <span class="eyebrow" style="color:var(--rose-light);">Prochaines visites</span>
+          <h2>Agenda des rencontres de quartier.</h2>
+          <p class="muted">Permanences, cafés-rencontres, ateliers d'écoute, réunions publiques.</p>
+          <a class="btn btn--light" href="agenda.html">Voir l'agenda complet</a>
+        </div>
+        <div>
+          <div data-agenda="4"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div data-footer></div>
+  <script src="assets/script.js"></script>
+</body>
+</html>

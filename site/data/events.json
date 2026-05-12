@@ -1,0 +1,47 @@
+[
+  {
+    "id": "permanence-anza-mai",
+    "title": "Permanence citoyenne — quartier Anza",
+    "date": "2026-05-18",
+    "time": "16:00 — 19:00",
+    "place": "Maison des jeunes, Anza",
+    "type": "Permanence",
+    "quartier": "Anza"
+  },
+  {
+    "id": "cafe-rencontre-jeunes",
+    "title": "Café-rencontre avec les jeunes d'Agadir",
+    "date": "2026-05-22",
+    "time": "18:30 — 20:30",
+    "place": "Centre culturel, Talborjt",
+    "type": "Rencontre",
+    "quartier": "Talborjt"
+  },
+  {
+    "id": "reunion-publique-mobilite",
+    "title": "Réunion publique : mobilité urbaine et quartiers",
+    "date": "2026-05-29",
+    "time": "19:00 — 21:00",
+    "place": "Salle polyvalente, Dakhla",
+    "type": "Réunion publique",
+    "quartier": "Dakhla"
+  },
+  {
+    "id": "permanence-bensergao",
+    "title": "Permanence citoyenne — Bensergao",
+    "date": "2026-06-05",
+    "time": "16:00 — 19:00",
+    "place": "Local associatif, Bensergao",
+    "type": "Permanence",
+    "quartier": "Bensergao"
+  },
+  {
+    "id": "atelier-femmes-droits",
+    "title": "Atelier d'écoute : femmes, droits, citoyenneté",
+    "date": "2026-06-12",
+    "time": "15:00 — 18:00",
+    "place": "Centre des femmes, Tikiouine",
+    "type": "Atelier",
+    "quartier": "Tikiouine"
+  }
+]

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Médiathèque — Dr. Raja Messou</title>
+  <meta name="description" content="Photos, vidéos, affiches, interviews, articles de presse et documents publics.">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div data-header></div>
+
+  <section class="pagehead">
+    <div class="container">
+      <div class="breadcrumbs"><a href="index.html">Accueil</a> · Médiathèque</div>
+      <span class="eyebrow" style="color:#fff;opacity:.9;">Mémoire visuelle</span>
+      <h1>Médiathèque citoyenne</h1>
+      <p>Photos, vidéos, affiches, interviews, articles de presse, infographies et documents.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="filters">
+        <button class="filter active" data-media="Tout">Tout</button>
+        <button class="filter" data-media="Photos">Photos</button>
+        <button class="filter" data-media="Vidéos">Vidéos</button>
+        <button class="filter" data-media="Presse">Presse</button>
+        <button class="filter" data-media="Infographies">Infographies</button>
+        <button class="filter" data-media="Documents">Documents</button>
+        <button class="filter" data-media="Terrain">Terrain</button>
+      </div>
+
+      <div class="media__grid" id="media-grid">
+        <div class="media__item" data-type="Photos">
+          <span class="media__item__type">Photos</span>
+          <div class="ph">AN</div>
+          <div class="media__item__cap">Rencontre citoyenne — Anza, mai 2026</div>
+        </div>
+        <div class="media__item" data-type="Vidéos">
+          <span class="media__item__type">Vidéo</span>
+          <div class="ph">▶</div>
+          <div class="media__item__cap">Intervention au Conseil communal — avril 2026</div>
+        </div>
+        <div class="media__item" data-type="Presse">
+          <span class="media__item__type">Presse</span>
+          <div class="ph">📰</div>
+          <div class="media__item__cap">Interview radio locale — mars 2026</div>
+        </div>
+        <div class="media__item" data-type="Infographies">
+          <span class="media__item__type">Infographie</span>
+          <div class="ph">📊</div>
+          <div class="media__item__cap">Cartographie des quartiers visités</div>
+        </div>
+        <div class="media__item" data-type="Documents">
+          <span class="media__item__type">PDF</span>
+          <div class="ph">PDF</div>
+          <div class="media__item__cap">Rapport trimestriel Q1 — 2026</div>
+        </div>
+        <div class="media__item" data-type="Terrain">
+          <span class="media__item__type">Terrain</span>
+          <div class="ph">BE</div>
+          <div class="media__item__cap">Visite à Bensergao — collecte des déchets</div>
+        </div>
+        <div class="media__item" data-type="Photos">
+          <span class="media__item__type">Photos</span>
+          <div class="ph">TA</div>
+          <div class="media__item__cap">Café-rencontre à Talborjt</div>
+        </div>
+        <div class="media__item" data-type="Vidéos">
+          <span class="media__item__type">Vidéo</span>
+          <div class="ph">▶</div>
+          <div class="media__item__cap">Tribune : pacte emploi jeunes</div>
+        </div>
+        <div class="media__item" data-type="Infographies">
+          <span class="media__item__type">Infographie</span>
+          <div class="ph">📈</div>
+          <div class="media__item__cap">Tableau de bord trimestriel</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="citizen">
+        <h2>Une photo, une vidéo, un témoignage à partager ?</h2>
+        <p>Envoyez-nous votre contenu citoyen, nous étudierons sa publication.</p>
+        <a class="btn btn--light" href="reclamations.html?type=Témoignage">Partager mon contenu</a>
+      </div>
+    </div>
+  </section>
+
+  <div data-footer></div>
+  <script src="assets/script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const filters = document.querySelectorAll(".filter[data-media]");
+      const items = document.querySelectorAll("#media-grid .media__item");
+      filters.forEach(f => f.addEventListener("click", () => {
+        filters.forEach(x => x.classList.remove("active"));
+        f.classList.add("active");
+        const t = f.dataset.media;
+        items.forEach(it => {
+          it.style.display = (t === "Tout" || it.dataset.type === t) ? "" : "none";
+        });
+      }));
+    });
+  </script>
+</body>
+</html>

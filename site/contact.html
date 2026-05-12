@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact — Dr. Raja Messou</title>
+  <meta name="description" content="Contacter Dr. Raja Messou : email, téléphone, permanence, WhatsApp, rendez-vous.">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div data-header></div>
+
+  <section class="pagehead">
+    <div class="container">
+      <div class="breadcrumbs"><a href="index.html">Accueil</a> · Contact</div>
+      <span class="eyebrow" style="color:#fff;opacity:.9;">Contact direct</span>
+      <h1>Écrire à Raja Messou</h1>
+      <p>Une porte ouverte, plusieurs chemins. Choisissez celui qui vous convient.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cards">
+        <a class="card" href="#contact-form" style="text-decoration:none;color:inherit;">
+          <div class="card__img"><div class="ph">✉</div><span class="card__cat">Écrire</span></div>
+          <div class="card__body">
+            <h3 class="card__title">Je veux contacter Raja Messou</h3>
+            <p class="card__excerpt">Pour toute question, demande de presse, partenariat ou message personnel.</p>
+            <span class="card__more">Remplir le formulaire</span>
+          </div>
+        </a>
+        <a class="card" href="reclamations.html" style="text-decoration:none;color:inherit;">
+          <div class="card__img"><div class="ph">!</div><span class="card__cat">Réclamation</span></div>
+          <div class="card__body">
+            <h3 class="card__title">Je veux déposer une réclamation</h3>
+            <p class="card__excerpt">Signalement de quartier, demande citoyenne, proposition publique.</p>
+            <span class="card__more">Espace citoyen</span>
+          </div>
+        </a>
+        <a class="card" href="actualites.html" style="text-decoration:none;color:inherit;">
+          <div class="card__img"><div class="ph">📰</div><span class="card__cat">Suivre</span></div>
+          <div class="card__body">
+            <h3 class="card__title">Je veux suivre les actualités</h3>
+            <p class="card__excerpt">Lire les dernières publications, s'inscrire à la newsletter citoyenne.</p>
+            <span class="card__more">Voir les publications</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container row">
+      <div>
+        <span class="eyebrow">Coordonnées</span>
+        <h2>Comment nous joindre</h2>
+        <ul class="bio__list">
+          <li><strong>Email&nbsp;:</strong>&nbsp;contact@rajamessou.ma</li>
+          <li><strong>Téléphone&nbsp;:</strong>&nbsp;sur rendez-vous</li>
+          <li><strong>WhatsApp&nbsp;:</strong>&nbsp;disponible pour les rendez-vous citoyens</li>
+          <li><strong>Permanence citoyenne&nbsp;:</strong>&nbsp;Agadir — horaires publiés dans l'agenda</li>
+          <li><strong>Réseaux sociaux&nbsp;:</strong>&nbsp;Facebook · Instagram · X · YouTube</li>
+        </ul>
+        <a class="btn btn--primary" href="agenda.html">Voir les permanences</a>
+      </div>
+
+      <div>
+        <form class="form" id="contact-form" data-form="contact">
+          <div class="form__row">
+            <div class="field">
+              <label>Nom <span class="req">*</span></label>
+              <input name="nom" required placeholder="Votre nom complet">
+            </div>
+            <div class="field">
+              <label>Email <span class="req">*</span></label>
+              <input type="email" name="email" required placeholder="vous@exemple.ma">
+            </div>
+          </div>
+          <div class="field">
+            <label>Sujet <span class="req">*</span></label>
+            <input name="sujet" required placeholder="Objet de votre message">
+          </div>
+          <div class="field">
+            <label>Message <span class="req">*</span></label>
+            <textarea name="message" required placeholder="Votre message…"></textarea>
+          </div>
+          <div class="field--check">
+            <input type="checkbox" id="c-c" name="consent" required>
+            <label for="c-c">J'accepte le traitement de mes données pour la réponse à mon message (loi 09-08).</label>
+          </div>
+          <div><button class="btn btn--primary" type="submit">Envoyer mon message</button></div>
+          <div class="form__success">Merci, votre message a bien été envoyé.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div data-footer></div>
+  <script src="assets/script.js"></script>
+</body>
+</html>
