@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Espace citoyen · Réclamations — Dr. Raja Messou</title>
+  <meta name="description" content="Envoyez une remarque, une réclamation, une proposition ou un signalement à Dr. Raja Messou.">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div data-header></div>
+
+  <section class="pagehead">
+    <div class="container">
+      <div class="breadcrumbs"><a href="index.html">Accueil</a> · Espace citoyen</div>
+      <span class="eyebrow" style="color:#fff;opacity:.9;">Vous parlez, nous écoutons.</span>
+      <h1>Déposer une remarque, une réclamation, une proposition.</h1>
+      <p>
+        Chaque message sera lu. Les demandes seront classées par quartier et par thématique
+        afin de mieux suivre les priorités citoyennes.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container row">
+      <div>
+        <span class="eyebrow">Formulaire citoyen</span>
+        <h2>Votre voix compte. Écrivez-nous.</h2>
+        <p class="muted">
+          Réclamation, remarque, proposition, signalement, témoignage ou demande de rendez-vous :
+          ce formulaire les centralise pour un traitement clair et un suivi public.
+        </p>
+
+        <div class="form__notice" style="margin-top:1rem;">
+          <strong>Protection des données :</strong> les informations transmises sont utilisées
+          uniquement pour le traitement de votre message, dans le respect de la loi <strong>09-08</strong>
+          relative à la protection des données personnelles.
+        </div>
+
+        <ul class="bio__list" style="margin-top:1.4rem;">
+          <li>Toute demande reçoit un accusé de lecture</li>
+          <li>Classement par quartier et par thème</li>
+          <li>Suivi public dans la rubrique Terrain</li>
+          <li>Traitement strictement confidentiel des données nominatives</li>
+        </ul>
+      </div>
+
+      <div>
+        <form class="form" data-form="reclamation" id="rec-form">
+          <div class="form__row">
+            <div class="field">
+              <label>Nom et prénom <span class="req">*</span></label>
+              <input name="nom" required placeholder="Votre nom complet">
+            </div>
+            <div class="field">
+              <label>Téléphone</label>
+              <input name="tel" placeholder="06 — — — — — —">
+            </div>
+          </div>
+
+          <div class="form__row">
+            <div class="field">
+              <label>Email</label>
+              <input type="email" name="email" placeholder="vous@exemple.ma">
+            </div>
+            <div class="field">
+              <label>Quartier <span class="req">*</span></label>
+              <input name="quartier" required placeholder="Anza, Bensergao, Talborjt, Dakhla…">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Type de message <span class="req">*</span></label>
+            <select name="type" required>
+              <option value="">— choisir —</option>
+              <option>Réclamation</option>
+              <option>Remarque</option>
+              <option>Proposition</option>
+              <option>Signalement</option>
+              <option>Rendez-vous</option>
+              <option>Témoignage</option>
+              <option>Autre</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Sujet <span class="req">*</span></label>
+            <input name="sujet" required placeholder="En quelques mots : ex. éclairage public rue des Écoles">
+          </div>
+
+          <div class="field">
+            <label>Description détaillée <span class="req">*</span></label>
+            <textarea name="message" required placeholder="Décrivez la situation, le lieu précis, depuis quand, ce que vous proposez ou ce que vous demandez…"></textarea>
+          </div>
+
+          <div class="field">
+            <label>Pièce jointe (photo ou document)</label>
+            <input type="file" name="fichier" accept="image/*,.pdf,.doc,.docx">
+            <span class="field__hint">Facultatif. Formats acceptés : images, PDF, Word.</span>
+          </div>
+
+          <div class="field--check">
+            <input type="checkbox" id="consent" name="consent" required>
+            <label for="consent">
+              J'autorise le traitement de mes informations dans le cadre du suivi de ma demande,
+              conformément à la loi 09-08 sur la protection des données personnelles.
+              <span class="req">*</span>
+            </label>
+          </div>
+
+          <div>
+            <button class="btn btn--primary" type="submit">Envoyer ma demande</button>
+          </div>
+          <div class="form__success">
+            ✓ Merci, votre message a bien été enregistré.
+            Il sera lu et classé par quartier et par thématique.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow">Trois chemins rapides</span>
+          <h2>Choisissez votre type de demande</h2>
+          <p>Pour gagner du temps et pour mieux orienter votre dossier.</p>
+        </div>
+      </div>
+      <div class="cards">
+        <a class="card" href="#rec-form" style="text-decoration:none;color:inherit;">
+          <div class="card__img"><div class="ph">SI</div><span class="card__cat">Signalement</span></div>
+          <div class="card__body">
+            <h3 class="card__title">Signaler un problème de quartier</h3>
+            <p class="card__excerpt">Voirie, éclairage, déchets, sécurité, espaces publics, écoles, services.</p>
+            <span class="card__more">Remplir le formulaire</span>
+          </div>
+        </a>
+        <a class="card" href="#rec-form" style="text-decoration:none;color:inherit;">
+          <div class="card__img"><div class="ph">PR</div><span class="card__cat">Proposition</span></div>
+          <div class="card__body">
+            <h3 class="card__title">Proposer une idée pour Agadir</h3>
+            <p class="card__excerpt">Jeunes, femmes, quartiers, mobilité, environnement, culture, transparence.</p>
+            <span class="card__more">Soumettre votre idée</span>
+          </div>
+        </a>
+        <a class="card" href="#rec-form" style="text-decoration:none;color:inherit;">
+          <div class="card__img"><div class="ph">RV</div><span class="card__cat">Rendez-vous</span></div>
+          <div class="card__body">
+            <h3 class="card__title">Demander un rendez-vous</h3>
+            <p class="card__excerpt">Permanence citoyenne, rencontre de quartier, échange individuel.</p>
+            <span class="card__more">Prendre rendez-vous</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div data-footer></div>
+  <script src="assets/script.js"></script>
+  <script>
+    // Pré-sélection du type via querystring (?type=...)
+    document.addEventListener("DOMContentLoaded", () => {
+      const t = new URLSearchParams(location.search).get("type");
+      if (t) {
+        const sel = document.querySelector('select[name="type"]');
+        if (sel) {
+          [...sel.options].forEach(o => { if (o.value.toLowerCase() === t.toLowerCase()) sel.value = o.value; });
+        }
+      }
+    });
+  </script>
+</body>
+</html>
