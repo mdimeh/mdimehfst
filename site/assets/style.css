@@ -6,36 +6,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@300;400;500;600;700;800&family=Cairo:wght@400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap');
 
 :root {
-  --rose: #e91e63;
-  --rose-light: #f8bbd0;
-  --rose-dark: #ad1457;
-  --violet: #6a1b9a;
-  --violet-light: #9c27b0;
-  --violet-dark: #4a148c;
-  --gradient: linear-gradient(135deg, #6a1b9a 0%, #e91e63 100%);
-  --gradient-soft: linear-gradient(135deg, #f3e5f5 0%, #fce4ec 100%);
+  /* USFP charte officielle */
+  --rose: #E1568F;
+  --rose-light: #f7c8db;
+  --rose-dark: #B43A6F;
+  --violet: #6E2380;
+  --violet-light: #8b3aa0;
+  --violet-dark: #542673;
+  --green: #9DC11C;
+  --green-light: #B4CD46;
+  --green-dark: #7ea015;
+  --usfp-green: #9DC11C;
+
+  --gradient: linear-gradient(135deg, #542673 0%, #6E2380 50%, #E1568F 100%);
+  --gradient-soft: linear-gradient(135deg, #f3eaf6 0%, #fbe9f0 100%);
 
   --bg: #ffffff;
-  --bg-soft: #faf7fb;
-  --bg-dark: #1a0d24;
+  --bg-soft: #fbf8fd;
+  --bg-dark: #1c1027;
   --bg-darker: #110718;
   --surface: #ffffff;
-  --surface-dark: #261335;
+  --surface-dark: #2a1638;
 
-  --text: #1a0d24;
+  --text: #1c1027;
   --text-soft: #4a3658;
   --muted: #8a7c95;
   --border: #ebe3f0;
   --border-dark: #3a234a;
 
-  --ok: #2e7d32;
+  --ok: #5a8a1c;
   --warn: #ef6c00;
-  --info: #1565c0;
+  --info: #6E2380;
 
   --radius: 14px;
   --radius-lg: 22px;
-  --shadow: 0 6px 24px rgba(106, 27, 154, 0.08);
-  --shadow-lg: 0 18px 50px rgba(106, 27, 154, 0.18);
+  --shadow: 0 6px 24px rgba(84, 38, 115, 0.10);
+  --shadow-lg: 0 18px 50px rgba(84, 38, 115, 0.20);
 
   --maxw: 1200px;
 }
@@ -1006,3 +1012,196 @@ img, video, iframe { max-width: 100%; height: auto; }
 /* Footer admin/publier discreet link */
 .footer__bottom a.discreet { opacity: 0.5; }
 .footer__bottom a.discreet:hover { opacity: 1; }
+
+/* =========================================================
+   v3 — REFONTE MOBILE & CHARTE USFP (override layer)
+   Applique : padding mobile, simplification header,
+   respiration hero, hiérarchie boutons, vert institutionnel.
+   ========================================================= */
+
+/* ---- Conteneur : padding mobile garanti ---- */
+.container {
+  padding-inline: 20px;
+}
+@media (max-width: 600px) {
+  .container { padding-inline: 18px; }
+}
+
+/* ---- Header mobile simplifié ---- */
+@media (max-width: 760px) {
+  .topbar { display: none; }
+  .header { position: sticky; top: 0; }
+  .nav { padding: 0.7rem 0; gap: 0.5rem; }
+  .brand__sub { display: none; }
+  .brand__name { font-size: 0.98rem; }
+  .brand__logo { width: 38px; height: 38px; font-size: 1rem; }
+  /* on retire le bouton CTA primaire sur mobile : il est repris dans le hero */
+  .nav__cta .btn--primary { display: none; }
+  .nav__cta .btn--ghost { display: none; }
+  .nav__cta { gap: 0.25rem; }
+  .lang-switch { font-size: 0.74rem; }
+  .lang-switch a { padding: 0.32rem 0.55rem; }
+}
+
+/* ---- Brand logo : retour au monogramme propre (sans image placeholder) ---- */
+.brand__logo--img,
+.footer .brand__logo--img {
+  background: var(--gradient) !important;
+  padding: 0 !important;
+}
+.brand__logo--img img { display: none !important; }
+.brand__logo--img::after {
+  content: "RM";
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  color: #fff;
+  font-size: 1.05rem;
+  letter-spacing: 0;
+}
+
+/* ---- Hero : respiration mobile, hiérarchie boutons ---- */
+.hero__grid { gap: 2.6rem; }
+@media (max-width: 880px) {
+  .hero { padding-bottom: 0; }
+  .hero__grid {
+    grid-template-columns: 1fr;
+    padding: 2.5rem 0 0;
+    gap: 1.8rem;
+    text-align: start;
+  }
+  .hero h1 {
+    font-size: clamp(1.75rem, 7vw, 2.25rem) !important;
+    line-height: 1.25 !important;
+    margin-bottom: 1rem;
+  }
+  .hero p.lead {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    max-width: 38ch;
+    margin: 0;
+  }
+  .hero__tagline {
+    font-size: 1.05rem;
+    margin: 1.2rem 0;
+    line-height: 1.5;
+  }
+  .hero__buttons { margin-top: 1.2rem; gap: 0.55rem; }
+  /* Une seule action principale visible sur mobile : la suivante en secondaire */
+  .hero__buttons .btn--ghost { display: none; }
+  .hero__buttons .btn--light { background: rgba(255,255,255,0.92); color: var(--violet-dark); border-color: transparent; }
+  .hero__buttons .btn--primary {
+    background: var(--green);
+    color: #1c1027;
+    border-color: transparent;
+  }
+  /* Chips repoussés visuellement, plus petits, alignement RTL respecté */
+  .hero__chips {
+    margin-top: 1.4rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid rgba(255,255,255,0.18);
+    gap: 0.35rem;
+    justify-content: flex-start;
+  }
+  .hero__chips span {
+    font-size: 0.72rem;
+    padding: 0.22rem 0.65rem;
+    background: rgba(255,255,255,0.10);
+    border-color: rgba(255,255,255,0.18);
+  }
+  /* Le portrait flotte propre, transition douce vers la suite */
+  .hero__portrait {
+    max-width: 220px;
+    margin: 0.5rem auto 0;
+    border: 5px solid rgba(255,255,255,0.22);
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+  }
+  .hero__portrait img { border-radius: 50%; }
+  .hero__badge { display: none; }
+}
+
+/* Hero AR : interligne arabe généreux */
+html[dir="rtl"] .hero p.lead { line-height: 1.85; }
+html[dir="rtl"] .hero h1 { line-height: 1.3 !important; }
+html[dir="rtl"] .hero__tagline { line-height: 1.65; }
+
+/* ---- Le hero ne touche plus directement la section suivante : transition douce ---- */
+.hero {
+  padding-bottom: 1.5rem;
+}
+@media (min-width: 881px) {
+  .hero { padding-bottom: 0; }
+}
+
+/* ---- Typo arabe globale : interligne plus aéré ---- */
+html[dir="rtl"] body { font-size: 16px; }
+html[dir="rtl"] p { line-height: 1.85; }
+html[dir="rtl"] .card__excerpt { line-height: 1.75; }
+html[dir="rtl"] .pagehead p { line-height: 1.85; }
+
+/* ---- Sections : respiration verticale renforcée mobile ---- */
+@media (max-width: 600px) {
+  .section { padding: 2.4rem 0; }
+  .pagehead { padding: 2.4rem 0 1.8rem; }
+  h1 { font-size: clamp(1.7rem, 6vw, 2.1rem) !important; }
+  h2 { font-size: clamp(1.35rem, 5vw, 1.75rem) !important; line-height: 1.35; }
+  .section__head { gap: 0.4rem; margin-bottom: 1.2rem; }
+}
+
+/* ---- Vert USFP en accents institutionnels (sans changer la palette dominante) ---- */
+.tag { border-color: rgba(157, 193, 28, 0.4); }
+.tag:hover { background: var(--green-light); color: var(--violet-dark); }
+
+.card__more { color: var(--violet); }
+.card__more:hover { color: var(--green-dark); }
+
+.eyebrow {
+  position: relative;
+  padding-inline-start: 22px;
+}
+.eyebrow::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 50%; transform: translateY(-50%);
+  width: 14px; height: 2px;
+  background: var(--green);
+  border-radius: 1px;
+}
+.section--dark .eyebrow::before { background: var(--green-light); }
+/* le motif "fleur" décoratif du soft est conservé mais discret */
+.section--soft .eyebrow::before { background: var(--rose); }
+
+/* Hover bouton ghost passe par le vert pour signaler une action institutionnelle */
+.btn--ghost:hover { background: var(--violet); color: #fff; border-color: var(--violet); }
+
+/* Status badges : ok = vert USFP officiel */
+.status--ok { background: #f0f7e0; color: var(--green-dark); }
+.dash__num, .strip__num { background: linear-gradient(135deg, var(--violet) 0%, var(--rose) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* Page header : bande verte conservée mais raffinée */
+.pagehead { border-bottom: 3px solid var(--green); }
+
+/* Citizen themes : vert au survol pour cohérence institutionnelle */
+.citizen__themes a:hover { background: var(--green); color: var(--violet-dark); border-color: var(--green); }
+
+/* ---- Lien admin/publier dans footer encore plus discrets ---- */
+.footer__bottom a.discreet { opacity: 0.35; font-size: 0.8em; }
+.footer__bottom a.discreet:hover { opacity: 0.85; color: var(--rose-light); }
+
+/* ---- Anti-débordement horizontal global ---- */
+html, body { overflow-x: hidden; }
+.hero, .pagehead, .section { overflow-x: clip; }
+
+/* ---- Petits ajustements supplémentaires ---- */
+.featured__body .eyebrow { color: var(--rose-light); }
+.featured__body .eyebrow::before { background: var(--rose-light); }
+.btn--primary { background: var(--gradient); }
+.btn--primary:hover { filter: brightness(1.06); }
+
+/* CTA mobile dans le menu — caché en desktop */
+.nav__menu__cta { display: none; }
+@media (max-width: 980px) {
+  .nav__menu__cta { display: block; padding: 0.4rem 0.5rem 0.2rem; }
+}
