@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>دليل النشر — د. رجاء ميسو</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div data-header></div>
+
+  <section class="pagehead">
+    <div class="container">
+      <div class="breadcrumbs"><a href="index.html">الرئيسية</a> · دليل النشر</div>
+      <span class="eyebrow" style="color:#fff;opacity:.9;">للفريق التحريري</span>
+      <h1>النشر بانتظام، ببساطة.</h1>
+      <p>دليل تشغيلي لنشر المقالات والبلاغات والتقارير، دون أي كفاءة تقنية. خمس دقائق لكل نشرة.</p>
+    </div>
+  </section>
+
+  <section class="section guide">
+    <div class="container" style="max-width:840px;">
+      <h2 class="mag__section-title">المنطق التحريري</h2>
+      <p>
+        الموقع مبنيٌّ على أربع وظائف: <strong>الإعلام · الإنصات · الشرح · تقديم الحساب</strong>.
+        كل نشرة يجب أن تنتمي إلى إحدى هذه الوظائف وأن تُصنَّف ضمن فئة.
+      </p>
+
+      <h2 class="mag__section-title">الإيقاع الموصى به</h2>
+      <ul>
+        <li><strong>أسبوعياً</strong>: تقرير ميداني واحد + خبر واحد.</li>
+        <li><strong>كل أسبوعين</strong>: تحليل مطوَّل (فئة تحاليل).</li>
+        <li><strong>كل ثلاثة أشهر</strong>: تقرير عمومي للمساءلة.</li>
+        <li><strong>تبعاً للأحداث</strong>: بلاغات، تدخلات إعلامية، ملفات مستعجلة.</li>
+      </ul>
+
+      <h2 class="mag__section-title">الفئات المتاحة</h2>
+      <p>ميدان · المجلس الجماعي · بلاغات · تحاليل · الأحياء · إعلام · النساء · الشباب · مساءلة.</p>
+
+      <h2 class="mag__section-title">كيفية إضافة مقال (عربي)</h2>
+
+      <div class="guide__step">
+        <div class="guide__step__num">1</div>
+        <div>
+          <h3>افتح ملف <code>data/articles.ar.json</code></h3>
+          <p>هذا الملف عبارة عن لائحة من المقالات. كل إدخال يحترم البنية أسفله.</p>
+        </div>
+      </div>
+
+      <div class="guide__step">
+        <div class="guide__step__num">2</div>
+        <div>
+          <h3>أضف إدخالاً في رأس اللائحة</h3>
+          <pre>{
+  "id": "rencontre-citoyenne-anza-2026-05-12",
+  "title": "لقاء مواطن في أنزا — مرافق القُرب",
+  "date": "2026-05-12",
+  "category": "ميدان",
+  "tags": ["أنزا", "أحياء", "إنارة"],
+  "image": "assets/news/anza-2026-05-12.jpg",
+  "excerpt": "تقرير لقاء 12 ماي بأنزا: ثلاث أولويات.",
+  "content": "النص الكامل للمقال، في فقرات عدة مفصولة بسطر فارغ.\n\nالفقرة الثانية.",
+  "author": "د. رجاء ميسو",
+  "featured": false
+}</pre>
+          <p class="muted">
+            استعمل <strong>نفس المعرّف id</strong> ونفس <strong>التاريخ</strong> كما في النسخة الفرنسية،
+            لضمان التوافق عبر اللغتين.
+          </p>
+        </div>
+      </div>
+
+      <div class="guide__step">
+        <div class="guide__step__num">3</div>
+        <div>
+          <h3>أضف الصورة (اختياري)</h3>
+          <p>أودِع الملف في <code>assets/news/</code> (JPG أو PNG، عرض موصى به 1600 بكسل).</p>
+        </div>
+      </div>
+
+      <div class="guide__step">
+        <div class="guide__step__num">4</div>
+        <div>
+          <h3>النشر</h3>
+          <p>احفظ الملفات، ثم ادفع التغييرات (<code>git push</code>)، أو حرِّر مباشرة على GitHub.</p>
+        </div>
+      </div>
+
+      <h2 class="mag__section-title">تحديث الأجندة</h2>
+      <p>الملف: <code>data/events.ar.json</code>.</p>
+
+      <h2 class="mag__section-title">تحديث ملفات الميدان</h2>
+      <p>الملف: <code>data/quartiers.ar.json</code>. الحالات: <strong>بلّغنا · توصلنا · جارٍ · قيد المتابعة · جواب مكتمل</strong>.</p>
+
+      <h2 class="mag__section-title">استقبال الرسائل من المواطنين</h2>
+      <p>
+        افتراضياً، الاستمارات تُخزَّن في المتصفح وتظهر في صفحة <a href="admin.html">الإدارة</a>
+        (كلمة السر الافتراضية: <code>agadir2026</code>).
+        لاستقبال متعدد المستخدمين، اربط استمارة بـ Webhook عبر <code>data-endpoint</code> (Formspree, Getform, Netlify Forms).
+      </p>
+
+      <div class="citizen" style="margin-top:2.5rem;">
+        <h2>تحتاج المساعدة؟</h2>
+        <p>إذا توقفتم في مقال، اكتبوا إلى الفريق — فريقٌ بشري.</p>
+        <a class="btn btn--light" href="contact.html">الاتصال بالفريق</a>
+      </div>
+    </div>
+  </section>
+
+  <div data-footer></div>
+  <script src="../assets/script.js"></script>
+</body>
+</html>

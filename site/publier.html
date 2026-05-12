@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Publier un article — Guide éditorial</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div data-header></div>
+
+  <section class="pagehead">
+    <div class="container">
+      <div class="breadcrumbs"><a href="index.html">Accueil</a> · Guide de publication</div>
+      <span class="eyebrow" style="color:#fff;opacity:.9;">Pour l'équipe éditoriale</span>
+      <h1>Publier régulièrement, simplement.</h1>
+      <p>
+        Un guide opérationnel pour publier articles, communiqués et comptes rendus,
+        sans aucune compétence technique. Cinq minutes par publication.
+      </p>
+    </div>
+  </section>
+
+  <section class="section guide">
+    <div class="container" style="max-width:840px;">
+      <h2 class="mag__section-title">Logique éditoriale</h2>
+      <p>
+        Le site repose sur quatre fonctions : <strong>informer · écouter · expliquer · rendre compte</strong>.
+        Chaque publication doit relever d'une de ces fonctions et être classée par catégorie.
+      </p>
+
+      <div class="visualcard" style="margin:1.5rem 0;">
+        <img src="assets/images/signature.png" alt="Ma signature politique">
+        <div class="visualcard__cap">Cinq engagements de redevabilité — référence éditoriale.</div>
+      </div>
+
+      <h2 class="mag__section-title">Rythme recommandé</h2>
+      <ul>
+        <li><strong>Hebdomadaire</strong> : 1 compte rendu de terrain + 1 actualité.</li>
+        <li><strong>Bimensuel</strong> : 1 analyse longue (rubrique Analyses).</li>
+        <li><strong>Trimestriel</strong> : 1 rapport public de redevabilité.</li>
+        <li><strong>Au fil de l'eau</strong> : communiqués, interventions médias, dossiers urgents.</li>
+      </ul>
+
+      <h2 class="mag__section-title">Catégories disponibles</h2>
+      <p>
+        Terrain · Conseil communal · Communiqués · Analyses · Quartiers · Médias · Femmes · Jeunes ·
+        Redevabilité. Une seule catégorie principale par article.
+      </p>
+
+      <h2 class="mag__section-title">Comment ajouter un article (FR)</h2>
+
+      <div class="guide__step">
+        <div class="guide__step__num">1</div>
+        <div>
+          <h3>Ouvrir le fichier <code>data/articles.json</code></h3>
+          <p>Ce fichier est un tableau d'articles. Chaque entrée respecte la structure ci-dessous.</p>
+        </div>
+      </div>
+
+      <div class="guide__step">
+        <div class="guide__step__num">2</div>
+        <div>
+          <h3>Ajouter une entrée en haut du tableau</h3>
+          <pre>{
+  "id": "rencontre-citoyenne-anza-2026-05-12",
+  "title": "Rencontre citoyenne à Anza — services de proximité",
+  "date": "2026-05-12",
+  "category": "Terrain",
+  "tags": ["Anza", "quartiers", "éclairage"],
+  "image": "assets/news/anza-2026-05-12.jpg",
+  "excerpt": "Compte rendu de la rencontre du 12 mai à Anza : trois priorités identifiées.",
+  "content": "Texte complet de l'article, en plusieurs paragraphes séparés par des sauts de ligne.\n\nDeuxième paragraphe.",
+  "author": "Dr. Raja Messou",
+  "featured": false
+}</pre>
+          <p class="muted">
+            <strong>id</strong> doit être unique, en minuscules, avec des tirets. <strong>image</strong> est facultatif :
+            si vide, un visuel généré sera utilisé. <strong>featured: true</strong> met l'article « à la une ».
+          </p>
+        </div>
+      </div>
+
+      <div class="guide__step">
+        <div class="guide__step__num">3</div>
+        <div>
+          <h3>Ajouter l'image (facultatif)</h3>
+          <p>
+            Déposez le fichier dans <code>assets/news/</code> (formats JPG ou PNG, largeur recommandée 1600px).
+            Renseignez le chemin relatif dans le champ <code>image</code>.
+          </p>
+        </div>
+      </div>
+
+      <div class="guide__step">
+        <div class="guide__step__num">4</div>
+        <div>
+          <h3>Publier la version arabe</h3>
+          <p>
+            Dupliquez l'entrée dans <code>data/articles.ar.json</code>, en utilisant le <strong>même id</strong>
+            et la <strong>même date</strong>, et en traduisant titre, résumé, contenu, tags et catégorie.
+          </p>
+        </div>
+      </div>
+
+      <div class="guide__step">
+        <div class="guide__step__num">5</div>
+        <div>
+          <h3>Mettre en ligne</h3>
+          <p>
+            Si vous éditez en local : sauvegardez les fichiers, poussez le commit
+            (<code>git push</code>). Si vous éditez directement sur GitHub :
+            cliquez « Commit changes » sur chaque fichier modifié.
+          </p>
+        </div>
+      </div>
+
+      <h2 class="mag__section-title">Mettre à jour l'agenda</h2>
+      <p>Fichier : <code>data/events.json</code> (FR) et <code>data/events.ar.json</code> (AR).</p>
+      <pre>{
+  "id": "permanence-anza-juin",
+  "title": "Permanence citoyenne — quartier Anza",
+  "date": "2026-06-15",
+  "time": "16:00 — 19:00",
+  "place": "Maison des jeunes, Anza",
+  "type": "Permanence",
+  "quartier": "Anza"
+}</pre>
+
+      <h2 class="mag__section-title">Mettre à jour les dossiers terrain</h2>
+      <p>Fichier : <code>data/quartiers.json</code> (FR) et <code>data/quartiers.ar.json</code> (AR).</p>
+      <p>Statuts utilisables : <strong>Signalé · Reçu · En cours · Suivi · Réponse reçue</strong>.</p>
+
+      <h2 class="mag__section-title">Recevoir les messages des citoyens</h2>
+      <p>
+        Par défaut, les formulaires (réclamation, contact, newsletter) sont enregistrés dans le navigateur
+        et consultables sur la page <a href="admin.html">Admin</a> (mot de passe par défaut : <code>agadir2026</code>,
+        à changer dans <code>assets/script.js</code> via la variable <code>RM_ADMIN_PASSWORD</code>).
+      </p>
+      <p>Pour <strong>recevoir réellement</strong> les messages sur un email ou une base partagée, branchez un webhook :</p>
+      <ol>
+        <li>Créez un endpoint gratuit chez <a href="https://formspree.io" target="_blank" rel="noopener">Formspree</a>, <a href="https://getform.io" target="_blank" rel="noopener">Getform</a>, ou <a href="https://docs.netlify.com/forms/setup/" target="_blank" rel="noopener">Netlify Forms</a>.</li>
+        <li>Ajoutez l'attribut <code>data-endpoint="https://votre-webhook"</code> sur chaque balise <code>&lt;form data-form="…"&gt;</code> dans <code>reclamations.html</code>, <code>contact.html</code> et l'<code>index.html</code> (newsletter).</li>
+        <li>Le script POSTera automatiquement chaque soumission au format JSON.</li>
+      </ol>
+
+      <h2 class="mag__section-title">Bonnes pratiques éditoriales</h2>
+      <ul>
+        <li>Un titre court (≤ 70 caractères), concret, jamais slogan.</li>
+        <li>Un résumé de 1 à 2 phrases qui explique le pourquoi.</li>
+        <li>Toujours préciser le quartier dans les tags si pertinent.</li>
+        <li>Ajouter au moins une photo de terrain par compte rendu.</li>
+        <li>Toute publication politique est accompagnée d'un acte concret (intervention, dossier, rendez-vous).</li>
+        <li>Pas de jargon, pas d'agression : sérieux, accessible, pédagogique.</li>
+      </ul>
+
+      <div class="citizen" style="margin-top:2.5rem;">
+        <h2>Besoin d'aide à la publication ?</h2>
+        <p>Si vous bloquez sur un article, écrivez à l'équipe — c'est une équipe humaine.</p>
+        <a class="btn btn--light" href="contact.html">Contacter l'équipe</a>
+      </div>
+    </div>
+  </section>
+
+  <div data-footer></div>
+  <script src="assets/script.js"></script>
+</body>
+</html>

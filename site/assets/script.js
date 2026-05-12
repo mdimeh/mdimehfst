@@ -219,7 +219,13 @@
         </div>
         <div class="container footer__bottom">
           <div>© ${new Date().getFullYear()} ${T.name} — ${T.footerRights}</div>
-          <div>${T.footerSubtitle}</div>
+          <div>
+            ${T.footerSubtitle}
+            <span class="dot">·</span>
+            <a class="discreet" href="publier.html">${IS_AR ? "النشر" : "Publier"}</a>
+            <span class="dot">·</span>
+            <a class="discreet" href="admin.html">${IS_AR ? "إدارة" : "Admin"}</a>
+          </div>
         </div>
       </footer>
     `;
@@ -486,18 +492,100 @@
       </div>`).join("")}</div>`;
   }
 
-  function wireForms() {
+  /* ---------- MAGAZINE LAYOUT (actualités) ---------- */
+  async function renderMagazine() {
+    const heroMount   = document.querySelector("[data-mag-hero]");
+    const secondaryMt = document.querySelector("[data-mag-secondary]");
+    const recentMt    = document.querySelector("[data-mag-recent]");
+    const tagsMt      = document.querySelector("[data-mag-tags]");
+    if (!heroMount && !secondaryMt && !recentMt && !tagsMt) return;
+
+    const all = (await loadJSON("articles")).sort((a, b) => b.date.localeCompare(a.date));
+    const featured = all.find(a => a.featured) || all[0];
+    const others = all.filter(a => a.id !== featured?.id);
+
+    if (heroMount && featured) {
+      const img = featured.image
+        ? `<img src="${ROOT}${featured.image}" alt="${featured.title}">`
+        : `<div class="ph">${initials(featured.title)}</div>`;
+      heroMount.innerHTML = `
+        ${img}
+        <div class="mag__hero__body">
+          <span class="mag__hero__cat">${IS_AR ? "في الواجهة" : "À la une"} · ${featured.category}</span>
+          <h2 class="mag__hero__title"><a href="article.html?id=${encodeURIComponent(featured.id)}">${featured.title}</a></h2>
+          <div class="mag__hero__meta">${fmtDate(featured.date)} — ${featured.excerpt || ""}</div>
+        </div>
+      `;
+    }
+
+    if (secondaryMt) {
+      secondaryMt.innerHTML = others.slice(0, 2).map(articleCard).join("");
+    }
+
+    if (recentMt) {
+      recentMt.innerHTML = all.slice(0, 6).map(a => `
+        <li>
+          <a href="article.html?id=${encodeURIComponent(a.id)}">${a.title}</a>
+          <span class="meta">${fmtDate(a.date)} · ${a.category}</span>
+        </li>
+      `).join("");
+    }
+
+    if (tagsMt) {
+      const counts = {};
+      all.forEach(a => (a.tags || []).forEach(t => counts[t] = (counts[t] || 0) + 1));
+      const tags = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 14);
+      tagsMt.innerHTML = tags.map(([t, n]) =>
+        `<a href="#" data-tag-filter="${t}">#${t} <small>(${n})</small></a>`
+      ).join("");
+    }
+
+    document.querySelectorAll("[data-cat-filter]").forEach(a => {
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        const cat = a.dataset.catFilter;
+        const target = document.querySelector("[data-articles]");
+        if (!target) return;
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        document.querySelectorAll(".filter").forEach(f => {
+          f.classList.toggle("active", f.dataset.cat === cat);
+        });
+        target.dispatchEvent(new CustomEvent("filter", { detail: cat }));
+        const filterBtn = document.querySelector(`.filter[data-cat="${cat}"]`);
+        filterBtn?.click();
+      });
+    });
+  }
+
+  /* ---------- FORMS (localStorage + optional webhook) ---------- */
+  async function wireForms() {
     document.querySelectorAll("form[data-form]").forEach(form => {
       const success = form.querySelector(".form__success");
-      form.addEventListener("submit", (e) => {
+      const endpoint = form.dataset.endpoint || form.getAttribute("action") || "";
+      form.addEventListener("submit", async (e) => {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(form).entries());
+        const record = { ...data, _at: new Date().toISOString(), _form: form.dataset.form };
+
+        // Always store locally for the admin view
         try {
           const key = "rm_" + (form.dataset.form || "form");
           const arr = JSON.parse(localStorage.getItem(key) || "[]");
-          arr.push({ ...data, _at: new Date().toISOString() });
+          arr.push(record);
           localStorage.setItem(key, JSON.stringify(arr));
         } catch (_) {}
+
+        // If a webhook endpoint is configured, POST to it
+        if (endpoint && /^https?:/i.test(endpoint)) {
+          try {
+            await fetch(endpoint, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(record),
+            });
+          } catch (err) { console.warn("Webhook failed:", err); }
+        }
+
         form.reset();
         if (success) {
           success.textContent = T.success;
@@ -517,6 +605,147 @@
     }
   }
 
+  /* ---------- ADMIN VIEW ---------- */
+  function renderAdmin() {
+    const mount = document.querySelector("[data-admin]");
+    if (!mount) return;
+
+    const KEYS = [
+      { key: "rm_reclamation", label: IS_AR ? "الشكايات" : "Réclamations" },
+      { key: "rm_contact",     label: IS_AR ? "رسائل الاتصال" : "Contact" },
+      { key: "rm_newsletter",  label: IS_AR ? "الاشتراكات" : "Newsletter" },
+    ];
+
+    const PASSWORD_KEY = "rm_admin_unlocked";
+    const isUnlocked = sessionStorage.getItem(PASSWORD_KEY) === "1";
+
+    const lockHTML = `
+      <div class="admin__login">
+        <h2>${IS_AR ? "وصول مقيَّد" : "Accès restreint"}</h2>
+        <p class="muted">${IS_AR ? "أدخل كلمة السر لعرض الرسائل المُستقبَلة." : "Entrez le mot de passe pour consulter les messages reçus."}</p>
+        <form class="form" id="admin-login">
+          <div class="field">
+            <label>${IS_AR ? "كلمة السر" : "Mot de passe"}</label>
+            <input type="password" name="pw" autofocus required>
+          </div>
+          <div><button class="btn btn--primary" type="submit">${IS_AR ? "دخول" : "Entrer"}</button></div>
+        </form>
+        <p class="muted" style="margin-top:1.4rem;font-size:.78rem;">
+          ${IS_AR ? "ملاحظة: هذا الوصول محلي للقراءة من المتصفح فقط. للنشر الفعلي اربط استمارة بـ Webhook." : "Note : cet accès lit uniquement les soumissions stockées localement dans ce navigateur. Pour une production, branchez le formulaire à un webhook (data-endpoint)."}
+        </p>
+      </div>
+    `;
+
+    function renderUnlocked() {
+      const tabs = KEYS.map((k, i) => {
+        const arr = JSON.parse(localStorage.getItem(k.key) || "[]");
+        return `<button class="admin__tab ${i === 0 ? "active" : ""}" data-tab="${k.key}">${k.label} (${arr.length})</button>`;
+      }).join("");
+
+      mount.innerHTML = `
+        <div class="admin__tabs">${tabs}</div>
+        <div class="admin__bar">
+          <button class="btn btn--ghost btn--sm" id="export-json" style="color:#fff;border-color:#fff;">${IS_AR ? "تصدير JSON" : "Exporter (JSON)"}</button>
+          <button class="btn btn--ghost btn--sm" id="export-csv" style="color:#fff;border-color:#fff;">${IS_AR ? "تصدير CSV" : "Exporter (CSV)"}</button>
+          <button class="btn btn--ghost btn--sm" id="clear-tab" style="color:#fff;border-color:#fff;">${IS_AR ? "محو هذه الفئة" : "Effacer cette catégorie"}</button>
+          <button class="btn btn--ghost btn--sm" id="logout" style="color:#fff;border-color:#fff;">${IS_AR ? "خروج" : "Verrouiller"}</button>
+        </div>
+        <div id="admin-content"></div>
+      `;
+
+      let activeKey = KEYS[0].key;
+
+      function paint() {
+        const content = document.getElementById("admin-content");
+        const items = JSON.parse(localStorage.getItem(activeKey) || "[]");
+        if (!items.length) {
+          content.innerHTML = `<div class="admin__empty">${IS_AR ? "لا توجد إدخالات بعد." : "Aucune entrée pour l'instant."}</div>`;
+          return;
+        }
+        const cols = Array.from(new Set(items.flatMap(o => Object.keys(o)))).filter(c => c !== "_form");
+        content.innerHTML = `
+          <div style="overflow-x:auto;">
+            <table class="admin__table">
+              <thead><tr>${cols.map(c => `<th>${c}</th>`).join("")}</tr></thead>
+              <tbody>
+                ${items.slice().reverse().map(it => `
+                  <tr>${cols.map(c => `<td>${(it[c] ?? "").toString().slice(0, 240)}</td>`).join("")}</tr>
+                `).join("")}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      mount.addEventListener("click", (e) => {
+        const tab = e.target.closest(".admin__tab");
+        if (tab) {
+          activeKey = tab.dataset.tab;
+          mount.querySelectorAll(".admin__tab").forEach(x => x.classList.remove("active"));
+          tab.classList.add("active");
+          paint();
+          return;
+        }
+        if (e.target.id === "logout") {
+          sessionStorage.removeItem(PASSWORD_KEY);
+          renderAdmin();
+          return;
+        }
+        if (e.target.id === "export-json") {
+          const data = JSON.parse(localStorage.getItem(activeKey) || "[]");
+          downloadBlob(JSON.stringify(data, null, 2), `${activeKey}.json`, "application/json");
+          return;
+        }
+        if (e.target.id === "export-csv") {
+          const data = JSON.parse(localStorage.getItem(activeKey) || "[]");
+          downloadBlob(toCSV(data), `${activeKey}.csv`, "text/csv");
+          return;
+        }
+        if (e.target.id === "clear-tab") {
+          if (confirm(IS_AR ? "هل أنت متأكد؟" : "Confirmer la suppression ?")) {
+            localStorage.removeItem(activeKey);
+            paint();
+            renderAdmin();
+          }
+        }
+      });
+
+      paint();
+    }
+
+    function downloadBlob(content, name, type) {
+      const blob = new Blob([content], { type });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = name; a.click();
+      URL.revokeObjectURL(url);
+    }
+    function toCSV(arr) {
+      if (!arr.length) return "";
+      const cols = Array.from(new Set(arr.flatMap(o => Object.keys(o))));
+      const esc = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+      return [cols.join(","), ...arr.map(r => cols.map(c => esc(r[c])).join(","))].join("\n");
+    }
+
+    if (!isUnlocked) {
+      mount.innerHTML = lockHTML;
+      document.getElementById("admin-login").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const pw = new FormData(e.target).get("pw");
+        // Local-only "lock". Default password is "agadir2026" — change it in publier.html guide.
+        const expected = window.RM_ADMIN_PASSWORD || "agadir2026";
+        if (pw === expected) {
+          sessionStorage.setItem(PASSWORD_KEY, "1");
+          renderUnlocked();
+        } else {
+          alert(IS_AR ? "كلمة سر خاطئة" : "Mot de passe incorrect");
+        }
+      });
+    } else {
+      renderUnlocked();
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     buildHeader();
     buildFooter();
@@ -524,9 +753,11 @@
     renderFeatured();
     renderArticlesList();
     renderPost();
+    renderMagazine();
     renderAgenda();
     renderDossiers();
     renderDashboard();
+    renderAdmin();
     wireForms();
   });
 })();

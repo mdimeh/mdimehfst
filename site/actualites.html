@@ -17,19 +17,71 @@
       <h1>Actualités</h1>
       <p>
         Activités de terrain, rencontres citoyennes, communiqués, interventions au Conseil communal,
-        prises de parole, dossiers en cours. Tout ce qui fait le quotidien d'un engagement public.
+        prises de parole et dossiers en cours.
       </p>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1rem;">
-        <div class="search">
-          <input type="search" data-search placeholder="Rechercher un article, un quartier, un sujet…">
-        </div>
-        <a class="btn btn--ghost btn--sm" href="reclamations.html">Envoyer une remarque</a>
+  <!-- Bandeau catégories -->
+  <section class="container" style="padding-top:1.5rem;">
+    <div class="mag__catstrip">
+      <span class="mag__catstrip__label">Rubriques</span>
+      <a href="#" data-cat-filter="Toutes">Toutes</a>
+      <a href="#" data-cat-filter="Terrain">Terrain</a>
+      <a href="#" data-cat-filter="Conseil communal">Conseil communal</a>
+      <a href="#" data-cat-filter="Communiqués">Communiqués</a>
+      <a href="#" data-cat-filter="Analyses">Analyses</a>
+      <a href="#" data-cat-filter="Quartiers">Quartiers</a>
+      <a href="#" data-cat-filter="Médias">Médias</a>
+      <a href="#" data-cat-filter="Femmes">Femmes</a>
+      <a href="#" data-cat-filter="Jeunes">Jeunes</a>
+      <a href="#" data-cat-filter="Redevabilité">Redevabilité</a>
+    </div>
+  </section>
+
+  <!-- Une magazine -->
+  <section class="section" style="padding-top:0;">
+    <div class="container mag">
+      <div>
+        <!-- Article principal -->
+        <article class="mag__hero" data-mag-hero>
+          <div class="ph">À LA UNE</div>
+          <div class="mag__hero__body">
+            <span class="mag__hero__cat">À la une</span>
+            <h2 class="mag__hero__title"><a href="#">…</a></h2>
+            <div class="mag__hero__meta">…</div>
+          </div>
+        </article>
+        <!-- 2 articles secondaires sous la une -->
+        <div class="mag__secondary" data-mag-secondary></div>
       </div>
+
+      <aside class="mag__side">
+        <div class="mag__side__block">
+          <h3>Recherche</h3>
+          <div class="search">
+            <input type="search" data-search placeholder="Article, quartier, sujet…">
+          </div>
+        </div>
+        <div class="mag__side__block">
+          <h3>Les plus récents</h3>
+          <ul class="mag__list" data-mag-recent></ul>
+        </div>
+        <div class="mag__side__block">
+          <h3>Mots-clés</h3>
+          <div class="mag__tagcloud" data-mag-tags></div>
+        </div>
+        <div class="mag__side__block" style="background:var(--bg-dark);color:#fff;border-color:var(--border-dark);">
+          <h3 style="color:var(--rose-light);">Envoyer une remarque</h3>
+          <p style="color:#cfb8de;font-size:.9rem;margin-bottom:.9rem;">Un sujet manquant ? Une précision à apporter ?</p>
+          <a class="btn btn--primary btn--sm" href="reclamations.html">Déposer une remarque</a>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Toutes les publications avec filtres -->
+    <div class="container" style="margin-top:1rem;">
+      <h2 class="mag__section-title">Toutes les publications</h2>
       <div class="filters" data-filters></div>
       <div class="cards" data-articles></div>
     </div>
