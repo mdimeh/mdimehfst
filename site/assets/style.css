@@ -721,3 +721,85 @@ html[dir="rtl"] .lang-switch { direction: ltr; }
   padding: 0.8rem 1rem; font-size: 0.86rem; color: var(--text-soft); font-weight: 600;
   border-top: 1px solid var(--border);
 }
+
+/* ================== USFP IDENTITY ENHANCEMENTS ================== */
+:root { --usfp-green: #8bc63f; }
+
+/* Subtle floral rose pattern, very low opacity, used on soft sections */
+.section--soft, body {
+  background-image:
+    radial-gradient(circle at 0% 0%, rgba(233,30,99,0.06) 0, transparent 35%),
+    radial-gradient(circle at 100% 100%, rgba(106,27,154,0.06) 0, transparent 35%);
+  background-attachment: fixed;
+}
+.section--soft {
+  background-color: var(--bg-soft);
+}
+
+/* Subtle rose silhouette watermark on dark sections */
+.section--dark {
+  position: relative;
+}
+.section--dark::after {
+  content: ""; position: absolute; right: -40px; bottom: -40px;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(233,30,99,0.18) 0%, transparent 65%);
+  pointer-events: none; z-index: 0;
+}
+.section--dark > .container { position: relative; z-index: 1; }
+
+/* Citizen themes pill row */
+.citizen__themes {
+  margin-top: 1.6rem; padding-top: 1.4rem;
+  border-top: 1px solid rgba(255,255,255,0.18);
+  display: flex; flex-wrap: wrap; gap: 0.45rem; align-items: center;
+  position: relative; z-index: 1;
+}
+.citizen__themes-label {
+  font-size: 0.72rem; letter-spacing: 1.6px; text-transform: uppercase;
+  font-weight: 700; opacity: 0.85; margin-inline-end: 0.6rem;
+}
+.citizen__themes a {
+  display: inline-block; padding: 0.4rem 0.95rem; border-radius: 999px;
+  background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.25);
+  color: #fff; font-size: 0.82rem; font-weight: 500;
+  transition: all 0.2s;
+}
+.citizen__themes a:hover {
+  background: var(--usfp-green); color: #fff; border-color: var(--usfp-green); transform: translateY(-1px);
+}
+
+/* Stronger gradient hero with rose accent overlay */
+.hero::after {
+  content: ""; position: absolute; right: -100px; top: 30%;
+  width: 380px; height: 380px;
+  background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* USFP rose decorative accent in section heads on soft bg */
+.section--soft .eyebrow::before {
+  content: "❀ "; color: var(--rose); margin-inline-end: 0.2rem;
+}
+
+/* Tri-color stripe at the top of pages for USFP identity */
+.pagehead { border-bottom: 4px solid var(--usfp-green); }
+
+/* Mobile improvements */
+@media (max-width: 600px) {
+  .hero__grid { padding: 2.5rem 0; gap: 1.8rem; }
+  .hero__buttons .btn { font-size: 0.85rem; padding: 0.65rem 1rem; }
+  .hero__buttons .btn--ghost { display: none; }
+  .section { padding: 2.8rem 0; }
+  .citizen { padding: 1.6rem 1.3rem; }
+  .citizen__themes a { font-size: 0.78rem; padding: 0.32rem 0.75rem; }
+  .strip__num { font-size: 1.5rem; }
+  .dash__num { font-size: 1.9rem; }
+  .featured__body { padding: 1.6rem; }
+  .nav__cta .lang-switch { margin-inline-start: 0.2rem; }
+  .nav__cta { gap: 0.3rem; }
+  .nav__cta .btn { padding: 0.45rem 0.7rem; font-size: 0.75rem; }
+  .topbar { display: none; }
+  .agenda__date { padding: 0.4rem 0.3rem; }
+  .agenda__day { font-size: 1.3rem; }
+}

@@ -65,18 +65,40 @@
             </div>
           </div>
 
-          <div class="field">
-            <label>نوع الرسالة <span class="req">*</span></label>
-            <select name="type" required>
-              <option value="">— اختر —</option>
-              <option>شكاية</option>
-              <option>ملاحظة</option>
-              <option>اقتراح</option>
-              <option>تبليغ</option>
-              <option>موعد</option>
-              <option>شهادة</option>
-              <option>أخرى</option>
-            </select>
+          <div class="form__row">
+            <div class="field">
+              <label>نوع الرسالة <span class="req">*</span></label>
+              <select name="type" required>
+                <option value="">— اختر —</option>
+                <option>شكاية</option>
+                <option>ملاحظة</option>
+                <option>اقتراح</option>
+                <option>تبليغ</option>
+                <option>موعد</option>
+                <option>شهادة</option>
+                <option>أخرى</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>المحور <span class="req">*</span></label>
+              <select name="theme" required>
+                <option value="">— اختر —</option>
+                <option>الطرق</option>
+                <option>الإنارة</option>
+                <option>النفايات</option>
+                <option>النقل</option>
+                <option>الأمن</option>
+                <option>الفضاءات العمومية</option>
+                <option>المدارس</option>
+                <option>الشباب</option>
+                <option>النساء</option>
+                <option>الرياضة</option>
+                <option>الثقافة</option>
+                <option>البيئة</option>
+                <option>المرافق العمومية</option>
+                <option>أخرى</option>
+              </select>
+            </div>
           </div>
 
           <div class="field">
@@ -154,13 +176,13 @@
   <script src="../assets/script.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const t = new URLSearchParams(location.search).get("type");
-      if (t) {
-        const sel = document.querySelector('select[name="type"]');
-        if (sel) {
-          [...sel.options].forEach(o => { if (o.value === t) sel.value = o.value; });
-        }
-      }
+      const qs = new URLSearchParams(location.search);
+      ["type","theme"].forEach(key => {
+        const v = qs.get(key);
+        if (!v) return;
+        const sel = document.querySelector(`select[name="${key}"]`);
+        if (sel) [...sel.options].forEach(o => { if (o.value === v) sel.value = o.value; });
+      });
     });
   </script>
 </body>

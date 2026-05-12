@@ -70,18 +70,40 @@
             </div>
           </div>
 
-          <div class="field">
-            <label>Type de message <span class="req">*</span></label>
-            <select name="type" required>
-              <option value="">— choisir —</option>
-              <option>Réclamation</option>
-              <option>Remarque</option>
-              <option>Proposition</option>
-              <option>Signalement</option>
-              <option>Rendez-vous</option>
-              <option>Témoignage</option>
-              <option>Autre</option>
-            </select>
+          <div class="form__row">
+            <div class="field">
+              <label>Type de message <span class="req">*</span></label>
+              <select name="type" required>
+                <option value="">— choisir —</option>
+                <option>Réclamation</option>
+                <option>Remarque</option>
+                <option>Proposition</option>
+                <option>Signalement</option>
+                <option>Rendez-vous</option>
+                <option>Témoignage</option>
+                <option>Autre</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Thématique <span class="req">*</span></label>
+              <select name="theme" required>
+                <option value="">— choisir —</option>
+                <option>Voirie</option>
+                <option>Éclairage</option>
+                <option>Déchets</option>
+                <option>Transport</option>
+                <option>Sécurité</option>
+                <option>Espaces publics</option>
+                <option>Écoles</option>
+                <option>Jeunesse</option>
+                <option>Femmes</option>
+                <option>Sport</option>
+                <option>Culture</option>
+                <option>Environnement</option>
+                <option>Services publics</option>
+                <option>Autre</option>
+              </select>
+            </div>
           </div>
 
           <div class="field">
@@ -162,15 +184,17 @@
   <div data-footer></div>
   <script src="assets/script.js"></script>
   <script>
-    // Pré-sélection du type via querystring (?type=...)
+    // Pré-sélection via querystring (?type=... ou ?theme=...)
     document.addEventListener("DOMContentLoaded", () => {
-      const t = new URLSearchParams(location.search).get("type");
-      if (t) {
-        const sel = document.querySelector('select[name="type"]');
-        if (sel) {
-          [...sel.options].forEach(o => { if (o.value.toLowerCase() === t.toLowerCase()) sel.value = o.value; });
-        }
-      }
+      const qs = new URLSearchParams(location.search);
+      ["type","theme"].forEach(key => {
+        const v = qs.get(key);
+        if (!v) return;
+        const sel = document.querySelector(`select[name="${key}"]`);
+        if (sel) [...sel.options].forEach(o => {
+          if (o.value.toLowerCase() === v.toLowerCase()) sel.value = o.value;
+        });
+      });
     });
   </script>
 </body>
