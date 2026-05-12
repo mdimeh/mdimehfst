@@ -1,43 +1,117 @@
 /* =========================================================
-   Dr. Raja Messou — blog citoyen | JS
-   - Shared header / footer
-   - Article rendering (cards, single post, filters)
-   - Agenda rendering
-   - Dossiers terrain
-   - Forms (réclamations, contact, newsletter)
+   Dr. Raja Messou — blog citoyen | JS (FR + AR)
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const SITE = {
-    name: "Dr. Raja Messou",
-    tagline: "Agadir d'abord, et toujours",
-    sub: "Blog citoyen · Agadir · Proximité · Redevabilité",
-    email: "contact@rajamessou.ma",
-    phone: "+212 (0) 5 28 — — — —",
-    whatsapp: "212600000000",
-    address: "Permanence citoyenne, Agadir",
-    socials: [
-      { label: "FB", href: "#", name: "Facebook" },
-      { label: "IG", href: "#", name: "Instagram" },
-      { label: "X",  href: "#", name: "X" },
-      { label: "YT", href: "#", name: "YouTube" },
+  /* ---------- LOCALE DETECTION ---------- */
+  const IS_AR =
+    document.documentElement.lang === "ar" ||
+    document.documentElement.dir === "rtl" ||
+    location.pathname.includes("/ar/");
+
+  const ROOT = IS_AR ? "../" : "";        // path back to site root from /ar/
+  const HERE = IS_AR ? "" : "";           // current dir prefix
+
+  /* ---------- I18N ---------- */
+  const T = IS_AR ? {
+    name: "د. رجاء ميسو",
+    sub: "مدونة مواطنة · أكادير · قُرب · مساءلة",
+    tagline: "أكادير أولاً، ودائماً",
+    nav: [
+      { href: "index.html",        label: "الرئيسية" },
+      { href: "actualites.html",   label: "الأخبار" },
+      { href: "blog.html",         label: "تحاليل" },
+      { href: "terrain.html",      label: "الميدان" },
+      { href: "reclamations.html", label: "فضاء المواطنين" },
+      { href: "agenda.html",       label: "الأجندة" },
+      { href: "mediatheque.html",  label: "الوسائط" },
+      { href: "engagements.html",  label: "الالتزامات" },
+      { href: "redevabilite.html", label: "المساءلة" },
+      { href: "a-propos.html",     label: "نبذة" },
+      { href: "contact.html",      label: "اتصال" },
     ],
+    topbarLeft1: "إرسال ملاحظة",
+    topbarLeft2: "طلب موعد",
+    ctaWrite: "اكتب",
+    ctaClaim: "شكاية",
+    readMore: "اقرأ المزيد",
+    share: "شارك",
+    shareOn: "شارك هذا الموضوع",
+    sendOnSubject: "أرسل ملاحظة حول هذا الموضوع",
+    relatedTitle: "اقرأ أيضاً",
+    by: "بقلم",
+    none: "لا توجد منشورات حالياً.",
+    noEvent: "لا توجد مواعيد مبرمجة حالياً.",
+    noMatch: "لا توجد نتائج مطابقة.",
+    notFound: "المقال غير موجود.",
+    success: "✓ شكراً لك. تم تسجيل رسالتك وستُقرأ وتُصنّف.",
+    dashboardLabels: ["مقالات منشورة", "مواعيد مبرمجة", "أحياء تمت زيارتها", "ملفات قيد المتابعة"],
+    blogFooter: "المدونة",
+    citizenFooter: "فضاء المواطنين",
+    aboutFooter: "نبذة",
+    footerLines: {
+      blog: ["الأخبار","تحاليل","الميدان","الأجندة","الوسائط"],
+      citizen: ["تقديم شكاية","اقتراح فكرة","طلب موعد","المساءلة","الالتزامات"],
+      about: ["المسار","اتصال","المداومات","شروط الاستخدام","قانون 09-08"],
+    },
+    footerTagline: "أكادير أولاً، ودائماً — فضاء للإصغاء، الإعلام، القُرب والمساءلة المواطنة.",
+    footerRights: "© جميع الحقوق محفوظة.",
+    footerSubtitle: "مصمَّم للإعلام، الإصغاء، الشرح، والمحاسبة.",
+    cats: { "Toutes":"الكل", "Terrain":"ميدان", "Communiqués":"بلاغات", "Analyses":"تحاليل", "Conseil communal":"المجلس الجماعي", "Femmes":"النساء", "Jeunes":"الشباب", "Quartiers":"الأحياء", "Médias":"إعلام", "Redevabilité":"مساءلة" },
+  } : {
+    name: "Dr. Raja Messou",
+    sub: "Blog citoyen · Agadir · Proximité · Redevabilité",
+    tagline: "Agadir d'abord, et toujours",
+    nav: [
+      { href: "index.html",         label: "Accueil" },
+      { href: "actualites.html",    label: "Actualités" },
+      { href: "blog.html",          label: "Analyses" },
+      { href: "terrain.html",       label: "Terrain" },
+      { href: "reclamations.html",  label: "Espace citoyen" },
+      { href: "agenda.html",        label: "Agenda" },
+      { href: "mediatheque.html",   label: "Médiathèque" },
+      { href: "engagements.html",   label: "Engagements" },
+      { href: "redevabilite.html",  label: "Redevabilité" },
+      { href: "a-propos.html",      label: "À propos" },
+      { href: "contact.html",       label: "Contact" },
+    ],
+    topbarLeft1: "Déposer une remarque",
+    topbarLeft2: "Demander un rendez-vous",
+    ctaWrite: "Écrire",
+    ctaClaim: "Réclamation",
+    readMore: "Lire la suite",
+    share: "Partager",
+    shareOn: "Partager cet article",
+    sendOnSubject: "Envoyer une remarque sur ce sujet",
+    relatedTitle: "À lire aussi",
+    by: "par",
+    none: "Aucune publication pour l'instant.",
+    noEvent: "Aucun événement programmé pour le moment.",
+    noMatch: "Aucun article ne correspond à votre recherche.",
+    notFound: "Article introuvable.",
+    success: "✓ Merci, votre message a bien été enregistré. Il sera lu et classé.",
+    dashboardLabels: ["Articles publiés", "Rencontres programmées", "Quartiers visités", "Dossiers suivis"],
+    blogFooter: "Le blog",
+    citizenFooter: "Espace citoyen",
+    aboutFooter: "À propos",
+    footerLines: {
+      blog: ["Actualités","Analyses","Terrain","Agenda","Médiathèque"],
+      citizen: ["Déposer une réclamation","Proposer une idée","Demander un rendez-vous","Redevabilité","Engagements"],
+      about: ["Parcours","Contact","Permanences","Mentions légales","Loi 09-08"],
+    },
+    footerTagline: "Agadir d'abord, et toujours — un espace d'écoute, d'information, de proximité et de redevabilité citoyenne.",
+    footerRights: "Tous droits réservés.",
+    footerSubtitle: "Conçu pour informer, écouter, expliquer et rendre compte.",
+    cats: {},
   };
 
-  const NAV = [
-    { href: "index.html",         label: "Accueil" },
-    { href: "actualites.html",    label: "Actualités" },
-    { href: "blog.html",          label: "Analyses" },
-    { href: "terrain.html",       label: "Terrain" },
-    { href: "reclamations.html",  label: "Espace citoyen" },
-    { href: "agenda.html",        label: "Agenda" },
-    { href: "mediatheque.html",   label: "Médiathèque" },
-    { href: "engagements.html",   label: "Engagements" },
-    { href: "redevabilite.html",  label: "Redevabilité" },
-    { href: "a-propos.html",      label: "À propos" },
-    { href: "contact.html",       label: "Contact" },
+  const SOCIALS = [
+    { label: "FB", href: "#", name: "Facebook" },
+    { label: "IG", href: "#", name: "Instagram" },
+    { label: "X",  href: "#", name: "X" },
+    { label: "YT", href: "#", name: "YouTube" },
   ];
 
   /* ---------- HEADER ---------- */
@@ -45,44 +119,52 @@
     const mount = document.querySelector("[data-header]");
     if (!mount) return;
     const here = (location.pathname.split("/").pop() || "index.html").toLowerCase();
-    const links = NAV.map(n => {
+    const links = T.nav.map(n => {
       const active = n.href.toLowerCase() === here ? "active" : "";
       return `<li><a class="${active}" href="${n.href}">${n.label}</a></li>`;
     }).join("");
+
+    const altLang = IS_AR ? `${ROOT}index.html` : `ar/index.html`;
+    const langSwitch = `
+      <span class="lang-switch">
+        <a href="${IS_AR ? '../index.html' : 'index.html'}" class="${IS_AR ? '' : 'active'}">FR</a>
+        <a href="${IS_AR ? 'index.html' : 'ar/index.html'}" class="${IS_AR ? 'active' : ''}">ع</a>
+      </span>`;
 
     mount.innerHTML = `
       <div class="topbar">
         <div class="container">
           <div>
-            <strong>${SITE.name}</strong>
+            <strong>${T.name}</strong>
             <span class="dot">·</span>
-            <span>${SITE.sub}</span>
+            <span>${T.sub}</span>
           </div>
           <div>
-            <a href="reclamations.html">Déposer une remarque</a>
+            <a href="reclamations.html">${T.topbarLeft1}</a>
             <span class="dot">·</span>
-            <a href="contact.html">Demander un rendez-vous</a>
+            <a href="contact.html">${T.topbarLeft2}</a>
           </div>
         </div>
       </div>
       <header class="header">
         <div class="container nav">
           <a class="brand" href="index.html">
-            <span class="brand__logo">RM</span>
+            <span class="brand__logo brand__logo--img"><img src="${ROOT}assets/images/logo-rose.png" alt="USFP"></span>
             <span>
-              <span class="brand__name">Dr. Raja Messou</span><br>
-              <span class="brand__sub">Blog citoyen · Agadir</span>
+              <span class="brand__name">${T.name}</span><br>
+              <span class="brand__sub">${T.sub}</span>
             </span>
           </a>
-          <button class="nav__toggle" aria-label="Ouvrir le menu" data-nav-toggle>
+          <button class="nav__toggle" aria-label="menu" data-nav-toggle>
             <span></span><span></span><span></span>
           </button>
           <ul class="nav__menu" data-nav>
             ${links}
           </ul>
           <div class="nav__cta">
-            <a class="btn btn--ghost btn--sm" href="contact.html">Écrire</a>
-            <a class="btn btn--primary btn--sm" href="reclamations.html">Réclamation</a>
+            <a class="btn btn--ghost btn--sm" href="contact.html">${T.ctaWrite}</a>
+            <a class="btn btn--primary btn--sm" href="reclamations.html">${T.ctaClaim}</a>
+            ${langSwitch}
           </div>
         </div>
       </header>
@@ -97,65 +179,55 @@
   function buildFooter() {
     const mount = document.querySelector("[data-footer]");
     if (!mount) return;
-    const social = SITE.socials.map(s =>
+    const social = SOCIALS.map(s =>
       `<a href="${s.href}" title="${s.name}" aria-label="${s.name}">${s.label}</a>`
     ).join("");
+
+    const blogLinks   = ["actualites.html","blog.html","terrain.html","agenda.html","mediatheque.html"];
+    const citizenLinks= ["reclamations.html","reclamations.html","contact.html","redevabilite.html","engagements.html"];
+    const aboutLinks  = ["a-propos.html","contact.html","contact.html","#mentions","#donnees"];
+
+    const list = (arr, labels) =>
+      arr.map((href, i) => `<li><a href="${href}">${labels[i]}</a></li>`).join("");
 
     mount.innerHTML = `
       <footer class="footer">
         <div class="container footer__grid">
           <div class="footer__brand">
             <a class="brand" href="index.html" style="color:#fff;">
-              <span class="brand__logo">RM</span>
+              <span class="brand__logo brand__logo--img"><img src="${ROOT}assets/images/logo-rose.png" alt="USFP"></span>
               <span>
-                <span class="brand__name" style="color:#fff;">Dr. Raja Messou</span><br>
-                <span class="brand__sub" style="color:#cfb8de;">Blog citoyen · Agadir</span>
+                <span class="brand__name" style="color:#fff;">${T.name}</span><br>
+                <span class="brand__sub" style="color:#cfb8de;">${T.sub}</span>
               </span>
             </a>
-            <p>${SITE.tagline} — un espace d'écoute, d'information, de proximité et de redevabilité citoyenne.</p>
+            <p>${T.footerTagline}</p>
             <div class="footer__social">${social}</div>
           </div>
           <div>
-            <h4>Le blog</h4>
-            <ul>
-              <li><a href="actualites.html">Actualités</a></li>
-              <li><a href="blog.html">Analyses</a></li>
-              <li><a href="terrain.html">Terrain</a></li>
-              <li><a href="agenda.html">Agenda</a></li>
-              <li><a href="mediatheque.html">Médiathèque</a></li>
-            </ul>
+            <h4>${T.blogFooter}</h4>
+            <ul>${list(blogLinks, T.footerLines.blog)}</ul>
           </div>
           <div>
-            <h4>Espace citoyen</h4>
-            <ul>
-              <li><a href="reclamations.html">Déposer une réclamation</a></li>
-              <li><a href="reclamations.html">Proposer une idée</a></li>
-              <li><a href="contact.html">Demander un rendez-vous</a></li>
-              <li><a href="redevabilite.html">Redevabilité</a></li>
-              <li><a href="engagements.html">Engagements</a></li>
-            </ul>
+            <h4>${T.citizenFooter}</h4>
+            <ul>${list(citizenLinks, T.footerLines.citizen)}</ul>
           </div>
           <div>
-            <h4>À propos</h4>
-            <ul>
-              <li><a href="a-propos.html">Parcours</a></li>
-              <li><a href="contact.html">Contact</a></li>
-              <li><a href="contact.html">Permanences</a></li>
-              <li><a href="#mentions">Mentions légales</a></li>
-              <li><a href="#donnees">Loi 09-08</a></li>
-            </ul>
+            <h4>${T.aboutFooter}</h4>
+            <ul>${list(aboutLinks, T.footerLines.about)}</ul>
           </div>
         </div>
         <div class="container footer__bottom">
-          <div>© ${new Date().getFullYear()} ${SITE.name} — Tous droits réservés.</div>
-          <div>Conçu pour informer, écouter, expliquer et rendre compte.</div>
+          <div>© ${new Date().getFullYear()} ${T.name} — ${T.footerRights}</div>
+          <div>${T.footerSubtitle}</div>
         </div>
       </footer>
     `;
   }
 
   /* ---------- DATA ---------- */
-  async function loadJSON(path) {
+  async function loadJSON(name) {
+    const path = `${ROOT}data/${name}${IS_AR ? ".ar" : ""}.json`;
     try {
       const r = await fetch(path, { cache: "no-store" });
       if (!r.ok) throw new Error("HTTP " + r.status);
@@ -169,13 +241,13 @@
   function fmtDate(iso) {
     if (!iso) return "";
     const d = new Date(iso);
-    return d.toLocaleDateString("fr-FR", { day: "2-digit", month: "long", year: "numeric" });
+    return d.toLocaleDateString(IS_AR ? "ar-MA" : "fr-FR", { day: "2-digit", month: "long", year: "numeric" });
   }
   function dayMonth(iso) {
     const d = new Date(iso);
     return {
       day: String(d.getDate()).padStart(2, "0"),
-      month: d.toLocaleDateString("fr-FR", { month: "short" }).replace(".", ""),
+      month: d.toLocaleDateString(IS_AR ? "ar-MA" : "fr-FR", { month: "short" }).replace(".", ""),
     };
   }
   function initials(title) {
@@ -186,7 +258,7 @@
   function articleCard(a) {
     const tags = (a.tags || []).slice(0, 3).map(t => `<span class="tag">#${t}</span>`).join("");
     const img = a.image
-      ? `<img src="${a.image}" alt="${a.title}">`
+      ? `<img src="${ROOT}${a.image}" alt="${a.title}">`
       : `<div class="ph">${initials(a.title)}</div>`;
     return `
       <article class="card">
@@ -199,69 +271,68 @@
           <h3 class="card__title"><a href="article.html?id=${encodeURIComponent(a.id)}">${a.title}</a></h3>
           <p class="card__excerpt">${a.excerpt || ""}</p>
           <div class="card__tags">${tags}</div>
-          <a class="card__more" href="article.html?id=${encodeURIComponent(a.id)}">Lire la suite</a>
+          <a class="card__more" href="article.html?id=${encodeURIComponent(a.id)}">${T.readMore}</a>
         </div>
       </article>
     `;
   }
 
-  /* ---------- LATEST ARTICLES (home) ---------- */
   async function renderLatest() {
     const mount = document.querySelector("[data-latest]");
     if (!mount) return;
     const limit = parseInt(mount.dataset.latest || "6", 10);
-    const arts = (await loadJSON("data/articles.json"))
+    const arts = (await loadJSON("articles"))
       .sort((a, b) => b.date.localeCompare(a.date))
       .slice(0, limit);
-    mount.innerHTML = arts.map(articleCard).join("") ||
-      `<div class="empty">Aucune publication pour l'instant.</div>`;
+    mount.innerHTML = arts.map(articleCard).join("") || `<div class="empty">${T.none}</div>`;
   }
 
-  /* ---------- FEATURED (home) ---------- */
   async function renderFeatured() {
     const mount = document.querySelector("[data-featured]");
     if (!mount) return;
-    const arts = await loadJSON("data/articles.json");
+    const arts = await loadJSON("articles");
     const a = arts.find(x => x.featured) || arts[0];
     if (!a) { mount.innerHTML = ""; return; }
+    const img = a.image
+      ? `<img src="${ROOT}${a.image}" alt="${a.title}">`
+      : `<div class="ph">${initials(a.title)}</div>`;
     mount.innerHTML = `
       <div class="featured">
-        <div class="featured__img"><div class="ph">${initials(a.title)}</div></div>
+        <div class="featured__img">${img}</div>
         <div class="featured__body">
-          <span class="eyebrow">À la une · ${a.category}</span>
+          <span class="eyebrow">${IS_AR ? "في الواجهة" : "À la une"} · ${a.category}</span>
           <h2>${a.title}</h2>
           <p>${a.excerpt}</p>
           <p class="muted">${fmtDate(a.date)}</p>
           <div>
-            <a class="btn btn--primary" href="article.html?id=${encodeURIComponent(a.id)}">Lire l'article</a>
+            <a class="btn btn--primary" href="article.html?id=${encodeURIComponent(a.id)}">${T.readMore}</a>
           </div>
         </div>
       </div>
     `;
   }
 
-  /* ---------- ALL ARTICLES + FILTERS ---------- */
   async function renderArticlesList() {
     const mount = document.querySelector("[data-articles]");
     if (!mount) return;
     const filterMount = document.querySelector("[data-filters]");
     const searchInput = document.querySelector("[data-search]");
-    const all = (await loadJSON("data/articles.json"))
+    const all = (await loadJSON("articles"))
       .sort((a, b) => b.date.localeCompare(a.date));
 
-    const cats = ["Toutes", ...Array.from(new Set(all.map(a => a.category)))];
+    const cats = [IS_AR ? "الكل" : "Toutes", ...Array.from(new Set(all.map(a => a.category)))];
     if (filterMount) {
       filterMount.innerHTML = cats.map((c, i) =>
         `<button class="filter ${i === 0 ? "active" : ""}" data-cat="${c}">${c}</button>`
       ).join("");
     }
 
-    let activeCat = "Toutes";
+    let activeCat = cats[0];
     let query = "";
 
     function paint() {
       const out = all.filter(a => {
-        const okCat = activeCat === "Toutes" || a.category === activeCat;
+        const okCat = activeCat === cats[0] || a.category === activeCat;
         const q = query.toLowerCase();
         const okQ = !q || (
           a.title.toLowerCase().includes(q) ||
@@ -272,7 +343,7 @@
       });
       mount.innerHTML = out.length
         ? out.map(articleCard).join("")
-        : `<div class="empty">Aucun article ne correspond à votre recherche.</div>`;
+        : `<div class="empty">${T.noMatch}</div>`;
     }
 
     filterMount?.addEventListener("click", (e) => {
@@ -284,26 +355,18 @@
       paint();
     });
 
-    searchInput?.addEventListener("input", (e) => {
-      query = e.target.value;
-      paint();
-    });
-
+    searchInput?.addEventListener("input", (e) => { query = e.target.value; paint(); });
     paint();
   }
 
-  /* ---------- SINGLE POST ---------- */
   async function renderPost() {
     const mount = document.querySelector("[data-post]");
     if (!mount) return;
-    const params = new URLSearchParams(location.search);
-    const id = params.get("id");
-    const all = await loadJSON("data/articles.json");
+    const id = new URLSearchParams(location.search).get("id");
+    const all = await loadJSON("articles");
     const a = all.find(x => x.id === id) || all[0];
-    if (!a) {
-      mount.innerHTML = `<div class="empty">Article introuvable.</div>`;
-      return;
-    }
+    if (!a) { mount.innerHTML = `<div class="empty">${T.notFound}</div>`; return; }
+
     const tags = (a.tags || []).map(t => `<span class="tag">#${t}</span>`).join("");
     const url = location.href;
     const shareW = `https://wa.me/?text=${encodeURIComponent(a.title + " — " + url)}`;
@@ -314,7 +377,11 @@
       .filter(x => x.id !== a.id && (x.category === a.category || (x.tags || []).some(t => (a.tags || []).includes(t))))
       .slice(0, 3);
 
-    document.title = `${a.title} — Dr. Raja Messou`;
+    document.title = `${a.title} — ${T.name}`;
+
+    const heroImg = a.image
+      ? `<img src="${ROOT}${a.image}" alt="${a.title}">`
+      : `<div class="ph">${initials(a.title)}</div>`;
 
     mount.innerHTML = `
       <article class="post">
@@ -322,40 +389,39 @@
           <span class="post__cat">${a.category}</span>
           <span>${fmtDate(a.date)}</span>
           <span>·</span>
-          <span>par ${a.author || "Dr. Raja Messou"}</span>
+          <span>${T.by} ${a.author || T.name}</span>
         </div>
         <h1>${a.title}</h1>
         <p class="muted">${a.excerpt || ""}</p>
-        <div class="post__hero"><div class="ph">${initials(a.title)}</div></div>
+        <div class="post__hero">${heroImg}</div>
         <div class="post__body">
           ${a.content.split(/\n+/).map(p => `<p>${p}</p>`).join("")}
         </div>
         <div class="card__tags">${tags}</div>
         <div class="post__share">
-          <strong>Partager</strong>
+          <strong>${T.share}</strong>
           <a class="share-btn" target="_blank" rel="noopener" href="${shareW}">WhatsApp</a>
           <a class="share-btn" target="_blank" rel="noopener" href="${shareF}">Facebook</a>
           <a class="share-btn" target="_blank" rel="noopener" href="${shareX}">X</a>
-          <a class="share-btn" href="reclamations.html?sujet=${encodeURIComponent(a.title)}">Envoyer une remarque sur ce sujet</a>
+          <a class="share-btn" href="reclamations.html?sujet=${encodeURIComponent(a.title)}">${T.sendOnSubject}</a>
         </div>
       </article>
       ${related.length ? `
         <section class="section">
-          <h2>À lire aussi</h2>
+          <h2>${T.relatedTitle}</h2>
           <div class="cards">${related.map(articleCard).join("")}</div>
         </section>` : ""}
     `;
   }
 
-  /* ---------- AGENDA ---------- */
   async function renderAgenda() {
     const mount = document.querySelector("[data-agenda]");
     if (!mount) return;
     const limit = parseInt(mount.dataset.agenda || "10", 10);
-    const items = (await loadJSON("data/events.json"))
+    const items = (await loadJSON("events"))
       .sort((a, b) => a.date.localeCompare(b.date))
       .slice(0, limit);
-    if (!items.length) { mount.innerHTML = `<div class="empty">Aucun événement programmé pour le moment.</div>`; return; }
+    if (!items.length) { mount.innerHTML = `<div class="empty">${T.noEvent}</div>`; return; }
     mount.innerHTML = `<div class="agenda">${items.map(ev => {
       const dm = dayMonth(ev.date);
       return `
@@ -374,55 +440,52 @@
     }).join("")}</div>`;
   }
 
-  /* ---------- DOSSIERS TERRAIN ---------- */
   async function renderDossiers() {
     const mount = document.querySelector("[data-dossiers]");
     if (!mount) return;
-    const items = await loadJSON("data/quartiers.json");
+    const items = await loadJSON("quartiers");
     const statusCls = (s) => {
       const k = (s || "").toLowerCase();
-      if (k.includes("reçu")) return "status--info";
-      if (k.includes("cours") || k.includes("suivi")) return "status--wait";
-      if (k.includes("réponse")) return "status--ok";
-      if (k.includes("signalé")) return "status--warn";
+      if (k.includes("reçu") || k.includes("توصلنا")) return "status--info";
+      if (k.includes("cours") || k.includes("suivi") || k.includes("جار") || k.includes("متابعة")) return "status--wait";
+      if (k.includes("réponse") || k.includes("جواب") || k.includes("مكتمل")) return "status--ok";
+      if (k.includes("signalé") || k.includes("بلّغنا")) return "status--warn";
       return "status--info";
     };
-    if (!items.length) { mount.innerHTML = `<div class="empty">Aucun dossier pour le moment.</div>`; return; }
+    if (!items.length) { mount.innerHTML = `<div class="empty">—</div>`; return; }
+
+    const labels = IS_AR
+      ? { sujet: "الموضوع", action: "الإجراء", date: "التاريخ" }
+      : { sujet: "Sujet", action: "Action", date: "Date" };
+
     mount.innerHTML = `<div class="dossier">${items.map(d => `
       <div class="dossier__item">
         <div class="dossier__head">
           <div class="dossier__quartier">${d.quartier}</div>
           <span class="status ${statusCls(d.statut)}">${d.statut}</span>
         </div>
-        <div class="dossier__row"><span>Sujet</span><span>${d.sujet}</span></div>
-        <div class="dossier__row"><span>Action</span><span>${d.action}</span></div>
-        <div class="dossier__row"><span>Date</span><span>${fmtDate(d.date)}</span></div>
+        <div class="dossier__row"><span>${labels.sujet}</span><span>${d.sujet}</span></div>
+        <div class="dossier__row"><span>${labels.action}</span><span>${d.action}</span></div>
+        <div class="dossier__row"><span>${labels.date}</span><span>${fmtDate(d.date)}</span></div>
       </div>
     `).join("")}</div>`;
   }
 
-  /* ---------- DASHBOARD STATS ---------- */
   async function renderDashboard() {
     const mount = document.querySelector("[data-dashboard]");
     if (!mount) return;
-    const arts = await loadJSON("data/articles.json");
-    const quartiers = await loadJSON("data/quartiers.json");
-    const events = await loadJSON("data/events.json");
+    const arts = await loadJSON("articles");
+    const quartiers = await loadJSON("quartiers");
+    const events = await loadJSON("events");
     const uniqQ = new Set(quartiers.map(q => q.quartier));
-    const stats = [
-      { num: arts.length, lbl: "Articles publiés" },
-      { num: events.length, lbl: "Rencontres programmées" },
-      { num: uniqQ.size, lbl: "Quartiers visités" },
-      { num: quartiers.length, lbl: "Dossiers suivis" },
-    ];
-    mount.innerHTML = `<div class="dash">${stats.map(s => `
+    const nums = [arts.length, events.length, uniqQ.size, quartiers.length];
+    mount.innerHTML = `<div class="dash">${nums.map((n, i) => `
       <div class="dash__item">
-        <div class="dash__num">${s.num}</div>
-        <div class="dash__lbl">${s.lbl}</div>
+        <div class="dash__num">${n}</div>
+        <div class="dash__lbl">${T.dashboardLabels[i]}</div>
       </div>`).join("")}</div>`;
   }
 
-  /* ---------- FORMS ---------- */
   function wireForms() {
     document.querySelectorAll("form[data-form]").forEach(form => {
       const success = form.querySelector(".form__success");
@@ -437,25 +500,23 @@
         } catch (_) {}
         form.reset();
         if (success) {
+          success.textContent = T.success;
           success.classList.add("show");
           success.scrollIntoView({ behavior: "smooth", block: "center" });
           setTimeout(() => success.classList.remove("show"), 8000);
         } else {
-          alert("Merci, votre message a bien été enregistré. Il sera lu et classé.");
+          alert(T.success);
         }
       });
     });
 
-    // Pre-fill "sujet" on réclamations from query string
-    const params = new URLSearchParams(location.search);
-    const sujet = params.get("sujet");
+    const sujet = new URLSearchParams(location.search).get("sujet");
     if (sujet) {
       const f = document.querySelector('[name="sujet"]');
       if (f) f.value = sujet;
     }
   }
 
-  /* ---------- BOOT ---------- */
   document.addEventListener("DOMContentLoaded", () => {
     buildHeader();
     buildFooter();

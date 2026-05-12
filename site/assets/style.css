@@ -3,7 +3,7 @@
    Design system: rose-violet, magazine citoyen, mobile-first
    ========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@300;400;500;600;700;800&family=Cairo:wght@400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap');
 
 :root {
   --rose: #e91e63;
@@ -659,3 +659,65 @@ p  { margin: 0 0 1em; }
   border: 1px solid var(--border); font: inherit; background: #fff;
 }
 .search input:focus { outline: none; border-color: var(--rose); }
+
+/* ================== RTL / ARABIC ================== */
+html[dir="rtl"] body,
+html[lang="ar"] body { font-family: 'Cairo', 'Inter', sans-serif; }
+
+html[dir="rtl"] h1,
+html[dir="rtl"] h2,
+html[dir="rtl"] h3,
+html[dir="rtl"] h4 { font-family: 'Cairo', 'Amiri', serif; line-height: 1.35; }
+
+html[dir="rtl"] .hero__tagline { border-left: 0; border-right: 3px solid #fff; padding-left: 0; padding-right: 1rem; }
+html[dir="rtl"] .form__notice { border-left: 0; border-right: 4px solid var(--rose); }
+html[dir="rtl"] .form__success { border-left: 0; border-right: 4px solid var(--ok); }
+html[dir="rtl"] .post__share { font-feature-settings: normal; }
+html[dir="rtl"] .timeline { padding-left: 0; padding-right: 2rem; }
+html[dir="rtl"] .timeline::before { left: auto; right: 0.6rem; }
+html[dir="rtl"] .timeline__item::before { left: auto; right: -1.85rem; }
+html[dir="rtl"] .card__more::after { content: "←"; }
+html[dir="rtl"] .card__more:hover::after { transform: translateX(-4px); }
+html[dir="rtl"] .bio__list li::before { margin-left: 0.6rem; }
+html[dir="rtl"] .breadcrumbs { letter-spacing: 0; }
+html[dir="rtl"] .hero__buttons,
+html[dir="rtl"] .hero__chips { justify-content: flex-end; }
+
+/* Language switcher in header */
+.lang-switch {
+  display: inline-flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden;
+  font-size: 0.78rem; font-weight: 700; margin-inline-start: 0.4rem;
+}
+.lang-switch a {
+  padding: 0.4rem 0.7rem; color: var(--text-soft); background: #fff;
+}
+.lang-switch a.active { background: var(--gradient); color: #fff; }
+.lang-switch a:hover:not(.active) { background: var(--bg-soft); }
+html[dir="rtl"] .lang-switch { direction: ltr; }
+
+/* Real portrait support: remove the giant RM placeholder when actual image is present */
+.hero__portrait img,
+.bio__img img,
+.featured__img img,
+.card__img img,
+.post__hero img,
+.media__item img { width: 100%; height: 100%; object-fit: cover; }
+
+.brand__logo--img { background: #fff !important; padding: 4px; }
+.brand__logo--img img { width: 100%; height: 100%; object-fit: contain; }
+
+/* Visual cards (images blocks) */
+.visualgrid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem;
+}
+@media (max-width: 900px) { .visualgrid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .visualgrid { grid-template-columns: 1fr; } }
+.visualcard {
+  background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; box-shadow: var(--shadow);
+}
+.visualcard img { width: 100%; height: auto; display: block; }
+.visualcard__cap {
+  padding: 0.8rem 1rem; font-size: 0.86rem; color: var(--text-soft); font-weight: 600;
+  border-top: 1px solid var(--border);
+}

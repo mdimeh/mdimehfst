@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>فضاء المواطنين · الشكايات — د. رجاء ميسو</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div data-header></div>
+
+  <section class="pagehead">
+    <div class="container">
+      <div class="breadcrumbs"><a href="index.html">الرئيسية</a> · فضاء المواطنين</div>
+      <span class="eyebrow" style="color:#fff;opacity:.9;">تتكلمون، ننصت.</span>
+      <h1>إيداع ملاحظة، شكاية، أو اقتراح.</h1>
+      <p>كل رسالة ستُقرأ. وستُصنَّف الطلبات حسب الحي والموضوع لمتابعة أفضل للأولويات المواطنة.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container row">
+      <div>
+        <span class="eyebrow">استمارة مواطنة</span>
+        <h2>صوتك مهم. اكتب إلينا.</h2>
+        <p class="muted">
+          شكاية، ملاحظة، اقتراح، تبليغ، شهادة أو طلب موعد:
+          هذه الاستمارة تُجمِّعها لمعالجة واضحة ومتابعة عمومية.
+        </p>
+
+        <div class="form__notice" style="margin-top:1rem;">
+          <strong>حماية المعطيات:</strong> تُستخدم المعلومات المُرسَلة فقط لمعالجة طلبك،
+          في احترام لقانون <strong>09-08</strong> المتعلق بحماية المعطيات الشخصية.
+        </div>
+
+        <ul class="bio__list" style="margin-top:1.4rem;">
+          <li>كل طلب يتلقى إشعاراً بالقراءة</li>
+          <li>التصنيف حسب الحي والموضوع</li>
+          <li>متابعة عمومية في فضاء "الميدان"</li>
+          <li>معالجة سرية صارمة للمعطيات الاسمية</li>
+        </ul>
+      </div>
+
+      <div>
+        <form class="form" data-form="reclamation" id="rec-form">
+          <div class="form__row">
+            <div class="field">
+              <label>الاسم الكامل <span class="req">*</span></label>
+              <input name="nom" required placeholder="اسمك الكامل">
+            </div>
+            <div class="field">
+              <label>الهاتف</label>
+              <input name="tel" placeholder="06 — — — — — —">
+            </div>
+          </div>
+
+          <div class="form__row">
+            <div class="field">
+              <label>البريد الإلكتروني</label>
+              <input type="email" name="email" placeholder="anta@example.ma">
+            </div>
+            <div class="field">
+              <label>الحي <span class="req">*</span></label>
+              <input name="quartier" required placeholder="أنزا، بنسركاو، تالبرجت، الداخلة…">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>نوع الرسالة <span class="req">*</span></label>
+            <select name="type" required>
+              <option value="">— اختر —</option>
+              <option>شكاية</option>
+              <option>ملاحظة</option>
+              <option>اقتراح</option>
+              <option>تبليغ</option>
+              <option>موعد</option>
+              <option>شهادة</option>
+              <option>أخرى</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>الموضوع <span class="req">*</span></label>
+            <input name="sujet" required placeholder="بكلمات قليلة: مثلاً، الإنارة العمومية بشارع المدارس">
+          </div>
+
+          <div class="field">
+            <label>الوصف المفصَّل <span class="req">*</span></label>
+            <textarea name="message" required placeholder="صِف الوضعية، المكان الدقيق، منذ متى، ما تقترحه أو تطلبه…"></textarea>
+          </div>
+
+          <div class="field">
+            <label>مرفق (صورة أو وثيقة)</label>
+            <input type="file" name="fichier" accept="image/*,.pdf,.doc,.docx">
+            <span class="field__hint">اختياري. صيغ مقبولة: صور، PDF، Word.</span>
+          </div>
+
+          <div class="field--check">
+            <input type="checkbox" id="consent" name="consent" required>
+            <label for="consent">
+              أوافق على معالجة معلوماتي في إطار متابعة طلبي، طبقاً لقانون 09-08 لحماية المعطيات الشخصية.
+              <span class="req">*</span>
+            </label>
+          </div>
+
+          <div>
+            <button class="btn btn--primary" type="submit">إرسال طلبي</button>
+          </div>
+          <div class="form__success"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow">ثلاثة مسارات سريعة</span>
+          <h2>اختر نوع طلبك</h2>
+          <p>لربح الوقت ولتوجيه ملفك بشكل أفضل.</p>
+        </div>
+      </div>
+      <div class="cards">
+        <a class="card" href="#rec-form" style="text-decoration:none;color:inherit;">
+          <div class="card__img"><div class="ph">SI</div><span class="card__cat">تبليغ</span></div>
+          <div class="card__body">
+            <h3 class="card__title">التبليغ عن مشكل في الحي</h3>
+            <p class="card__excerpt">طرق، إنارة، نفايات، أمن، فضاءات عمومية، مدارس، مرافق.</p>
+            <span class="card__more">ملء الاستمارة</span>
+          </div>
+        </a>
+        <a class="card" href="#rec-form" style="text-decoration:none;color:inherit;">
+          <div class="card__img"><div class="ph">PR</div><span class="card__cat">اقتراح</span></div>
+          <div class="card__body">
+            <h3 class="card__title">اقتراح فكرة لأكادير</h3>
+            <p class="card__excerpt">الشباب، النساء، الأحياء، التنقل، البيئة، الثقافة، الشفافية.</p>
+            <span class="card__more">تقديم اقتراحك</span>
+          </div>
+        </a>
+        <a class="card" href="#rec-form" style="text-decoration:none;color:inherit;">
+          <div class="card__img"><div class="ph">RV</div><span class="card__cat">موعد</span></div>
+          <div class="card__body">
+            <h3 class="card__title">طلب موعد</h3>
+            <p class="card__excerpt">مداومة مواطنة، لقاء حي، تبادل فردي.</p>
+            <span class="card__more">طلب الموعد</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div data-footer></div>
+  <script src="../assets/script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const t = new URLSearchParams(location.search).get("type");
+      if (t) {
+        const sel = document.querySelector('select[name="type"]');
+        if (sel) {
+          [...sel.options].forEach(o => { if (o.value === t) sel.value = o.value; });
+        }
+      }
+    });
+  </script>
+</body>
+</html>
