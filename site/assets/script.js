@@ -123,6 +123,8 @@
       const active = n.href.toLowerCase() === here ? "active" : "";
       return `<li><a class="${active}" href="${n.href}">${n.label}</a></li>`;
     }).join("");
+    // Mobile menu also receives the action CTA (since it's hidden in the nav__cta on mobile)
+    const mobileCta = `<li class="nav__menu__cta"><a href="reclamations.html" class="btn btn--primary btn--sm" style="justify-content:center;width:100%;">${T.ctaClaim}</a></li>`;
 
     const altLang = IS_AR ? `${ROOT}index.html` : `ar/index.html`;
     const langSwitch = `
@@ -149,7 +151,7 @@
       <header class="header">
         <div class="container nav">
           <a class="brand" href="index.html">
-            <span class="brand__logo brand__logo--img"><img src="${ROOT}assets/images/logo-rose.png" alt="USFP"></span>
+            <span class="brand__logo brand__logo--img" aria-hidden="true"></span>
             <span>
               <span class="brand__name">${T.name}</span><br>
               <span class="brand__sub">${T.sub}</span>
@@ -160,6 +162,7 @@
           </button>
           <ul class="nav__menu" data-nav>
             ${links}
+            ${mobileCta}
           </ul>
           <div class="nav__cta">
             <a class="btn btn--ghost btn--sm" href="contact.html">${T.ctaWrite}</a>
@@ -195,13 +198,14 @@
         <div class="container footer__grid">
           <div class="footer__brand">
             <a class="brand" href="index.html" style="color:#fff;">
-              <span class="brand__logo brand__logo--img"><img src="${ROOT}assets/images/logo-rose.png" alt="USFP"></span>
+              <span class="brand__logo brand__logo--img"></span>
               <span>
                 <span class="brand__name" style="color:#fff;">${T.name}</span><br>
                 <span class="brand__sub" style="color:#cfb8de;">${T.sub}</span>
               </span>
             </a>
             <p>${T.footerTagline}</p>
+            <img src="${ROOT}assets/images/logo-usfp.png" alt="USFP — Union Socialiste des Forces Populaires" style="max-width:200px;margin-top:1rem;background:rgba(255,255,255,0.94);padding:0.6rem 0.8rem;border-radius:8px;">
             <div class="footer__social">${social}</div>
           </div>
           <div>
