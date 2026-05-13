@@ -3,7 +3,7 @@
    Design system: rose-violet, magazine citoyen, mobile-first
    ========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@300;400;500;600;700;800&family=Cairo:wght@400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700;900&family=Bebas+Neue&family=Cairo:wght@400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap');
 
 :root {
   /* USFP charte officielle */
@@ -1205,3 +1205,109 @@ html, body { overflow-x: hidden; }
 @media (max-width: 980px) {
   .nav__menu__cta { display: block; padding: 0.4rem 0.5rem 0.2rem; }
 }
+
+/* =========================================================
+   v4 — CHARTE USFP : typo + motifs officiels
+   ========================================================= */
+
+/* Typo officielle USFP : Roboto pour le corps (FR), Bebas Neue pour les titres display, Cairo pour AR */
+body { font-family: 'Roboto', 'Inter', system-ui, sans-serif; }
+h1, h2, h3, h4 { font-family: 'Bebas Neue', 'Playfair Display', Georgia, serif; letter-spacing: 0.5px; }
+h1 { letter-spacing: 1.5px; }
+.btn { font-family: 'Roboto', sans-serif; letter-spacing: 0.5px; }
+.eyebrow { font-family: 'Roboto', sans-serif; }
+.hero__tagline { font-family: 'Playfair Display', Georgia, serif; }
+
+/* AR : conserve Cairo/Amiri en priorité */
+html[dir="rtl"] body { font-family: 'Cairo', 'Roboto', sans-serif; }
+html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3, html[dir="rtl"] h4 {
+  font-family: 'Cairo', 'Amiri', serif; letter-spacing: 0;
+}
+
+/* ---------- MOTIFS DÉCORATIFS USFP ---------- */
+/* Pois verts subtils sur sections soft */
+.section--soft {
+  background-image:
+    radial-gradient(circle at 8% 18%, rgba(157,193,28,0.10) 0, transparent 7px),
+    radial-gradient(circle at 92% 12%, rgba(157,193,28,0.10) 0, transparent 7px),
+    radial-gradient(circle at 18% 92%, rgba(180,205,70,0.10) 0, transparent 9px),
+    radial-gradient(circle at 88% 88%, rgba(225,86,143,0.08) 0, transparent 10px);
+  background-color: var(--bg-soft);
+  background-attachment: scroll;
+}
+
+/* Halftone rose subtle sur sections sombres */
+.section--dark {
+  position: relative;
+  background-color: var(--bg-dark);
+}
+.section--dark::before {
+  content: "";
+  position: absolute; right: 0; top: 0; bottom: 0; width: 240px;
+  background-image: radial-gradient(circle, rgba(225,86,143,0.15) 1.5px, transparent 1.5px);
+  background-size: 14px 14px;
+  opacity: 0.6; pointer-events: none;
+  mask-image: linear-gradient(to left, black 0%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to left, black 0%, transparent 100%);
+}
+html[dir="rtl"] .section--dark::before {
+  right: auto; left: 0;
+  mask-image: linear-gradient(to right, black 0%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, black 0%, transparent 100%);
+}
+
+/* Rose SVG décorative en watermark des pagehead */
+.pagehead { position: relative; overflow: hidden; }
+.pagehead::after {
+  content: "";
+  position: absolute; right: -60px; bottom: -60px;
+  width: 280px; height: 280px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><g fill='none' stroke='rgba(255,255,255,0.10)' stroke-width='2'><path d='M100 60 C 70 60 60 90 80 110 C 100 130 130 110 130 90 C 130 70 110 60 100 60 Z'/><path d='M70 110 C 50 130 60 160 90 165 L 100 200'/><path d='M130 110 C 150 130 140 160 110 165'/><path d='M85 170 L 70 175 M 115 170 L 130 175'/></g></svg>");
+  background-repeat: no-repeat; background-size: contain;
+  opacity: 0.7; pointer-events: none;
+}
+html[dir="rtl"] .pagehead::after { right: auto; left: -60px; transform: scaleX(-1); }
+
+/* Hero : rose stylisée discrète sur le côté */
+.hero::after {
+  content: "";
+  position: absolute; right: -80px; top: 8%;
+  width: 320px; height: 320px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><g fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='1.5'><path d='M100 60 C 70 60 60 90 80 110 C 100 130 130 110 130 90 C 130 70 110 60 100 60 Z'/><path d='M70 110 C 50 130 60 160 90 165 L 100 200'/><path d='M130 110 C 150 130 140 160 110 165'/></g></svg>");
+  background-repeat: no-repeat; background-size: contain;
+  pointer-events: none;
+  z-index: 0;
+}
+@media (max-width: 880px) {
+  .hero::after { display: none; }
+}
+
+/* Brand logo : monogramme RM stylisé avec petite rose au-dessus */
+.brand__logo--img {
+  position: relative;
+  background: var(--gradient) !important;
+}
+.brand__logo--img::before {
+  content: "";
+  position: absolute; top: 4px; right: 5px;
+  width: 10px; height: 10px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path d='M10 6 C 7 6 6 9 8 11 C 10 13 13 11 13 9 C 13 7 12 6 10 6 Z' fill='%23E1568F' stroke='white' stroke-width='0.8'/></svg>");
+  background-size: contain; background-repeat: no-repeat;
+}
+
+/* Petite icône rose à côté des eyebrow sur sections soft */
+.section--soft .eyebrow::before {
+  content: "";
+  position: absolute; inset-inline-start: 0;
+  top: 50%; transform: translateY(-50%);
+  width: 14px; height: 14px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path d='M10 6 C 7 6 6 9 8 11 C 10 13 13 11 13 9 C 13 7 12 6 10 6 Z M 7 11 C 5 13 6 16 9 17 M 13 11 C 15 13 14 16 11 17' fill='none' stroke='%23E1568F' stroke-width='1.5' stroke-linecap='round'/></svg>");
+  background-size: contain; background-repeat: no-repeat;
+  background-color: transparent;
+  border-radius: 0;
+}
+.section--soft .eyebrow { padding-inline-start: 22px; }
+
+/* Titres : retire l'effet inversé fort de Bebas sur petites pages */
+.brand__name { font-family: 'Bebas Neue', 'Playfair Display', sans-serif; letter-spacing: 1px; font-size: 1.2rem; }
+html[dir="rtl"] .brand__name { font-family: 'Cairo'; letter-spacing: 0; font-size: 1rem; font-weight: 700; }
